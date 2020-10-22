@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "lib": ["dom"],
+    "strict": true,
+    "esModuleInterop": true,
+    "jsx": "react",
+    "allowJs": true,
+    "noImplicitAny": true,
+    "noEmit": true,
+    "experimentalDecorators": true,
+    "skipLibCheck": true,
+    "moduleResolution": "node"
+  }
+}
