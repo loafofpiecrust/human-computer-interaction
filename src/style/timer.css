@@ -1,0 +1,19 @@
+.box {
+    border: 3px solid black;
+    height: 400px;
+    width: 800px;
+    padding-left: 800px;
+
+}
+
+main {
+    padding-left: 40px;
+}
+
+h1 {
+    text-align: center;
+}
+
+section.ttl-btn {
+    text-align: center;
+}
