@@ -11,13 +11,14 @@ export default () => (
     <section className={"ttl-btn"}>
       <div className={"row"}>
         <h2 className={"col-8"}>Your Timers</h2>
-        <button className={"button primary col-2"}>+</button>
+
+          <a href="/newTimer" className={"btn btn-primary"}>+ New Timer</a>
       </div>
     </section>
     <br/>
-    <section className={"box"}>
-
-    </section>
+    <div >
+      <p className={"box"}>hello</p>
+    </div>
 
   </main>
 )
