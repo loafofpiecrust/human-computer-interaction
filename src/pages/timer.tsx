@@ -12,12 +12,16 @@ export default () => (
       <div className={"row"}>
         <h2 className={"col-8"}>Your Timers</h2>
 
-          <a href="/newTimer" className={"btn btn-primary"}>+ New Timer</a>
+
+        <a href="/newTimer" className={"btn btn-primary col-2"}>
+          New Timer
+        </a>
+
       </div>
     </section>
     <br/>
     <div >
-      <p className={"box"}>hello</p>
+      <p className={"box"}>Timer1</p>
     </div>
 
   </main>
