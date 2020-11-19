@@ -1,17 +1,17 @@
 .box {
-
-    text-align: center;
-}
-
-p{
     border: 3px solid black;
     height: 400px;
     width: 800px;
+}
+
+input, p {
     text-align: center;
 }
 
 a{
- font-size: 30px;
+    width: 60px;
+    font-size: 60px;
+    color: black;
 }
 
 main {
