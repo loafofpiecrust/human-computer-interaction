@@ -1,11 +1,12 @@
 .box {
-    border: 3px solid black;
-    height: 400px;
-    width: 800px;
+
     text-align: center;
 }
 
 p{
+    border: 3px solid black;
+    height: 400px;
+    width: 800px;
     text-align: center;
 }
 
