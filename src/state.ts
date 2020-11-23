@@ -20,3 +20,17 @@ export const defaultTimer: Timer = {
 }
 
 export const useTimers = createPersistedState("timers")
+export const useTimerIndex = createPersistedState("currentTimer")
+export const useCurrentTimer: () => [Timer, (newTimer: Timer) => void] = () => {
+  const [timers, setTimers] = useTimers<Timer[]>([])
+  const [index, setIndex] = useTimerIndex<number>(0)
+
+  return [
+    timers && timers![index!],
+    (newTimer: Timer) => {
+      const newList = [...timers!]
+      newList[index] = newTimer
+      setTimers(newList!)
+    },
+  ]
+}

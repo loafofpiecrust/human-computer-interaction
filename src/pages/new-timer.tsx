@@ -1,5 +1,6 @@
 import React, { useRef } from "react"
 import { Timer, useTimers, defaultTimer } from "../state"
+import Layout from "../layout"
 import { Button } from "reakit/Button"
 import { navigate } from "gatsby"
 import {
@@ -26,9 +27,7 @@ export default () => {
   })
 
   return (
-    <main>
-      <h1>Personalized Music Timer</h1>
-
+    <Layout>
       <section className={"ttl-btn"}>
         <br />
         <Form {...form}>
@@ -99,6 +98,6 @@ export default () => {
           </FormSubmitButton>
         </Form>
       </section>
-    </main>
+    </Layout>
   )
 }

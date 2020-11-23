@@ -1,7 +1,8 @@
 import React from "react"
-import { Link } from "gatsby"
+import { Link, navigate } from "gatsby"
 import { Button } from "reakit/Button"
-import { useTimers, Timer } from "../state"
+import { useTimers, Timer, useTimerIndex } from "../state"
+import Layout from "../layout"
 import "../style/timer.css"
 import "bootstrap/dist/css/bootstrap.css"
 import "@fortawesome/free-solid-svg-icons"
@@ -9,10 +10,9 @@ import "@fortawesome/react-fontawesome"
 
 export default () => {
   const [timers, setTimers] = useTimers<Timer[]>([])
+  const [currentIndex, setCurrentIndex] = useTimerIndex<number>()
   return (
-    <main>
-      <h1>Personalized Music Timer</h1>
-
+    <Layout>
       <section className={"ttl-btn"}>
         <div className={"row"}>
           <h2 className={"col-8"}>Your Timers</h2>
@@ -23,13 +23,20 @@ export default () => {
         </div>
       </section>
       <br />
-      <div>
+      <div className="box">
         {timers.map((timer, idx) => (
-          <p className={"box"} key={idx}>
+          <Button
+            key={idx}
+            className="col"
+            onClick={() => {
+              setCurrentIndex(idx)
+              navigate("/timer")
+            }}
+          >
             {timer.title}
-          </p>
+          </Button>
         ))}
       </div>
-    </main>
+    </Layout>
   )
 }
