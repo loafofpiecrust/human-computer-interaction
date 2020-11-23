@@ -1,6 +1,7 @@
 import React from "react"
 import { Link, navigate } from "gatsby"
 import { Button } from "reakit/Button"
+import { Group } from "reakit/Group"
 import { useTimers, Timer, useTimerIndex } from "../state"
 import Layout from "../layout"
 import "../style/timer.css"
@@ -25,16 +26,18 @@ export default () => {
       <br />
       <div className="box">
         {timers.map((timer, idx) => (
-          <Button
-            key={idx}
-            className="col"
-            onClick={() => {
-              setCurrentIndex(idx)
-              navigate("/timer")
-            }}
-          >
-            {timer.title}
-          </Button>
+          <Group key={idx} className="row">
+            <Button
+              className="col-10"
+              onClick={() => {
+                setCurrentIndex(idx)
+                navigate("/timer")
+              }}
+            >
+              {timer.title}
+            </Button>
+            <Button className="col-2">Edit</Button>
+          </Group>
         ))}
       </div>
     </Layout>

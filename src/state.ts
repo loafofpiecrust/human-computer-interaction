@@ -11,6 +11,12 @@ export interface Timer {
   workAudio: string
 }
 
+export enum Period {
+  Work = "Work",
+  ShortBreak = "Short Break",
+  LongBreak = "Long Break",
+}
+
 export const defaultTimer: Timer = {
   title: "",
   workPeriod: 25 * 60,

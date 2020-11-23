@@ -1,28 +1,34 @@
 .box {
-    border: 3px solid black;
-    height: 400px;
-    width: 800px;
+  border: 3px solid black;
+  width: 100%;
+  min-height: 200px;
 }
 
-input, p {
-    text-align: center;
+.row {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
 }
 
-a{
-    width: 60px;
-    font-size: 60px;
-    color: black;
+input,
+p {
+  text-align: center;
+}
+
+a {
+  width: 60px;
+  font-size: 60px;
+  color: black;
 }
 
 main {
-    padding-left: 40px;
-    padding-right: 40px;
+  padding-left: 40px;
+  padding-right: 40px;
 }
 
 h1 {
-    text-align: center;
+  text-align: center;
 }
 
 section.ttl-btn {
-    text-align: center;
+  text-align: center;
 }
