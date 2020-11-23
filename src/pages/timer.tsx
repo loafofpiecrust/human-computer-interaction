@@ -9,28 +9,48 @@ export default () => {
   const [timer, setTimer] = useCurrentTimer()
   const [periodType, setPeriodType] = useState(Period.Work)
   const [intervalIndex, setInterval] = useState(0)
+  const [totalTime, setTotalTime] = useState(0)
   const [paused, setPaused] = useState(false)
 
   function progressInterval() {
     setInterval(intervalIndex + 1)
     if (periodType === Period.Work) {
       setPeriodType(Period.ShortBreak)
+      setTotalTime(totalTime + timer.workPeriod)
     } else {
       setPeriodType(Period.Work)
+
+      if (periodType === Period.ShortBreak) {
+        setTotalTime(totalTime + timer.shortBreak)
+      } else if (periodType === Period.LongBreak) {
+        setTotalTime(totalTime + timer.longBreak)
+      }
     }
   }
 
   return (
     <Layout>
-      <h2>{timer.title}</h2>
-      <h3>{periodType} Period</h3>
+      <header className="row">
+        <div style={{ flexGrow: 1 }}>
+          <h2>{timer.title}</h2>
+          <h3>{periodType} Period</h3>
+        </div>
+        <div>
+          <div>{displaySeconds(timer.workPeriod)} work</div>
+          <div>{displaySeconds(timer.shortBreak)} rest</div>
+          <div>{timer.intervalCount} intervals</div>
+          <div>{displaySeconds(totalTime)} passed</div>
+        </div>
+      </header>
       <PeriodTimeline
         intervalCount={4}
         workPeriod={timer.workPeriod}
         shortBreakPeriod={timer.shortBreak}
       />
       <Countdown
-        totalSeconds={timer.workPeriod}
+        totalSeconds={
+          periodType === Period.Work ? timer.workPeriod : timer.shortBreak
+        }
         onComplete={progressInterval}
         isPaused={paused}
       />
@@ -68,9 +88,11 @@ const Countdown = (props: {
   }, [seconds, props.isPaused])
 
   return (
-    <div style={{ fontSize: "2rem" }}>
-      {displaySeconds(seconds)} / {displaySeconds(props.totalSeconds)}
-    </div>
+    <>
+      <div style={{ fontSize: "2rem" }}>
+        {displaySeconds(seconds)} / {displaySeconds(props.totalSeconds)}
+      </div>
+    </>
   )
 }
 
@@ -84,14 +106,22 @@ const PeriodTimeline = (props: {
     periods.push(
       <div
         key={(i + 1) * 2}
-        style={{ flexGrow: props.workPeriod, backgroundColor: "blue" }}
+        style={{
+          flexGrow: props.workPeriod,
+          backgroundColor: "firebrick",
+          height: 16,
+        }}
       ></div>
     )
     if (i < props.intervalCount - 1) {
       periods.push(
         <div
           key={(i + 1) * 2 + 1}
-          style={{ flexGrow: props.shortBreakPeriod, backgroundColor: "green" }}
+          style={{
+            flexGrow: props.shortBreakPeriod,
+            backgroundColor: "aquamarine",
+            height: 16,
+          }}
         ></div>
       )
     }

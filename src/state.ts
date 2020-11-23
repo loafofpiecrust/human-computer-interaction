@@ -8,6 +8,7 @@ export interface Timer {
   shortBreak: number
   /** Length of long breaks in seconds */
   longBreak: number
+  intervalCount: number
   workAudio: string
 }
 
@@ -22,6 +23,7 @@ export const defaultTimer: Timer = {
   workPeriod: 25 * 60,
   shortBreak: 5 * 60,
   longBreak: 50 * 60,
+  intervalCount: 4,
   workAudio: "",
 }
 
