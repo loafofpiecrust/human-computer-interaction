@@ -3,6 +3,7 @@ import React from "react"
 export default () => (
   <main>
     <h1>Personalized Music Timeer</h1>
+    <a href={"/timers"}>Link to Project</a>
     <section>
       <h2>Authors</h2>
       <ul>
