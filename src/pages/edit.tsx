@@ -38,6 +38,7 @@ export default () => {
 
   return (
     <Layout>
+      <main>
       <section>
         <h3>Edit Timer: </h3>
       </section>
@@ -117,6 +118,7 @@ export default () => {
           </div>
         </Form>
       </section>
+      </main>
     </Layout>
   )
 }
