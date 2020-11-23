@@ -1,5 +1,5 @@
 import React, { useRef } from "react"
-import { Timer, useTimers, defaultTimer } from "../state"
+import { Timer, useTimers, defaultTimer, useTimerIndex } from "../state"
 import Layout from "../layout"
 import { Button } from "reakit/Button"
 import { navigate } from "gatsby"
@@ -17,14 +17,24 @@ import "@fortawesome/free-solid-svg-icons"
 import "@fortawesome/react-fontawesome"
 
 export default () => {
+  const [timerIndex, setTimerIndex] = useTimerIndex()
   const [timers, setTimers] = useTimers<Timer[]>([])
   const form = useFormState({
-    values: defaultTimer,
+    values: timers[timerIndex!],
     onSubmit: (timer) => {
-      setTimers([...timers, timer])
+      const newList = [...timers]
+      newList[timerIndex!] = timer
+      setTimers(newList)
       navigate("/timers")
     },
   })
+
+  function deleteTimer() {
+    const newList = [...timers]
+    newList.splice(timerIndex!, 1)
+    setTimers(newList)
+    navigate("/timers")
+  }
 
   return (
     <Layout>
@@ -101,9 +111,9 @@ export default () => {
               Save
             </FormSubmitButton>
             <p className="col-3"></p>
-            <FormSubmitButton {...form} className="btn btn-primary col-3">
+            <Button className="btn btn-primary col-3" onClick={deleteTimer}>
               Delete
-            </FormSubmitButton>
+            </Button>
           </div>
         </Form>
       </section>
