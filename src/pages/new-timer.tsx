@@ -80,7 +80,7 @@ export default () => {
             </div>
           </div>
           <div className="form-group">
-            <form className="row">
+            <div className="row">
               <div className="col-5">
                 <FormLabel {...form} className="fn" name="workAudio">
                   Sound for Work Period
@@ -91,7 +91,7 @@ export default () => {
                   <option value="Our Recommendation">Our Recommendation</option>
                 </select>
               </div>
-            </form>
+            </div>
           </div>
           <FormSubmitButton {...form} className="btn btn-primary">
             Create Timer
