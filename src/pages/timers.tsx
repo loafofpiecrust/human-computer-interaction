@@ -36,7 +36,10 @@ export default () => {
             >
               {timer.title}
             </Button>
-            <Button className="col-2">Edit</Button>
+            <Button className="col-2" onClick={() => {
+              setCurrentIndex(idx)
+              navigate("/edit")
+            }}>Edit</Button>
           </Group>
         ))}
       </div>
