@@ -7,10 +7,8 @@ export default () => (
     <a href={"/timers"}>Link to Project</a>
     <section>
       <h2>Authors</h2>
-      <ul>
-        <li>Taylor Snead</li>
-        <li>Jada Letts</li>
-      </ul>
+        <p>Taylor Snead</p>
+        <p>Jada Letts</p>
     </section>
     <section>
       <h2>Requirement Analysis</h2>
