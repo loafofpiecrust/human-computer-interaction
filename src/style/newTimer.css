@@ -10,3 +10,9 @@ input {
 input.fn, input.ln {
     margin-left: 20%;
 }
+main {
+    text-align: center;
+    background-color: cornflowerblue;
+    height: 1000px;
+    width: 100%;
+}
