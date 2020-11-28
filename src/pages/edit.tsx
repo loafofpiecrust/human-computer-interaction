@@ -34,6 +34,16 @@ export default () => {
     setTimers(newList)
     navigate("/timers")
   }
+
+  function multiply() {
+    var num1 = 60;
+    var num2 = document.getElementById("num_2");
+    // @ts-ignore
+    var result = num1 * num2;
+  }
+
+  // @ts-ignore
+  // @ts-ignore
   return (
     <Layout>
       <main>
@@ -70,12 +80,12 @@ export default () => {
                 </label>
             </div>
             <div className={"row"}>
-                <input  type="number"
-                  placeholder="Enter Minutes"></input>
+                <input  type="text"
+                  placeholder="Enter Minutes" id={"num_2"}></input>
               &nbsp; &nbsp;
                 <h5 > X 60 </h5>
               &nbsp; &nbsp;
-              <button value="">= </button>
+              <button >= </button>
             </div>
           </div>
 
