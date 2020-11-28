@@ -51,8 +51,8 @@ export default () => {
         <br/>
           <h2>Edit Timer</h2> *(at the moment time must be inputted in as seconds).
       </section>
-      <section className={"ttl-btn"}>
         <hr/>
+      <section className={"ttl-btn"}>
         <br/>
         <Form {...form}>
           <div className="form-group">
