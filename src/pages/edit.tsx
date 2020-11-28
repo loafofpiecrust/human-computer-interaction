@@ -1,5 +1,5 @@
-import React, { useRef } from "react"
-import { Timer, useTimers, defaultTimer, useTimerIndex } from "../state"
+import React from "react"
+import { Timer, useTimers, useTimerIndex } from "../state"
 import Layout from "../layout"
 import { Button } from "reakit/Button"
 import { navigate } from "gatsby"
@@ -8,16 +8,15 @@ import {
   unstable_Form as Form,
   unstable_FormLabel as FormLabel,
   unstable_FormInput as FormInput,
-  unstable_FormMessage as FormMessage,
   unstable_FormSubmitButton as FormSubmitButton,
 } from "reakit/Form"
-import "../style/timer.css"
+import "../style/edit.css"
 import "bootstrap/dist/css/bootstrap.css"
 import "@fortawesome/free-solid-svg-icons"
 import "@fortawesome/react-fontawesome"
 
 export default () => {
-  const [timerIndex, setTimerIndex] = useTimerIndex()
+  const [timerIndex] = useTimerIndex()
   const [timers, setTimers] = useTimers<Timer[]>([])
   const form = useFormState({
     values: timers[timerIndex!],
@@ -41,15 +40,23 @@ export default () => {
       <main>
       <section>
         <h3>Edit Timer: </h3>
+        {/*<div className="box">*/}
+        {/*  {timers.map((timer, idx) => (*/}
+        {/*    <Group key={idx} className="row">*/}
+        {/*      <p className="col-10" >*/}
+        {/*        {timer.title}*/}
+        {/*      </p>*/}
+        {/*    </Group>*/}
+        {/*  </div>*/}
       </section>
       <section className={"ttl-btn"}>
         <br />
         <Form {...form}>
           <div className="form-group">
             <div className="row">
-              <div className="col-5">
+              <div className="col">
                 <FormLabel {...form} name="title" className="fn">
-                  Title
+                  <h5>Title</h5>
                 </FormLabel>
                 <FormInput
                   {...form}
@@ -63,7 +70,7 @@ export default () => {
           </div>
           <div className="form-group">
             <div className="row">
-              <div className="col-5">
+              <div className="col">
                 <FormLabel {...form} className="fn" name="workPeriod">
                   Work Time
                 </FormLabel>
@@ -79,7 +86,7 @@ export default () => {
           </div>
           <div className="form-group">
             <div className="row">
-              <div className="col-5">
+              <div className="col">
                 <FormLabel {...form} className="fn" name="shortBreak">
                   Rest Time
                 </FormLabel>
@@ -95,11 +102,13 @@ export default () => {
           </div>
           <div className="form-group">
             <div className="row">
-              <div className="col-5">
+              <div className="col">
                 <FormLabel {...form} className="fn" name="workAudio">
-                  Sound for Work Period
+                  <h5>Sound for Work Period </h5>
                 </FormLabel>
-                <select id="options" name="sound_work_period">
+                &nbsp;
+                &nbsp;
+                <select className={"col"} id="options" name="sound_work_period">
                   <option value="None">None</option>
                   <option value="A Playlist">A Playlist</option>
                   <option value="Our Recommendation">Our Recommendation</option>
@@ -108,10 +117,10 @@ export default () => {
             </div>
           </div>
           <div className={"row"}>
-            <FormSubmitButton {...form} className="btn btn-primary col-3">
+            <FormSubmitButton {...form} className="btn btn-primary col">
               Save
             </FormSubmitButton>
-            <p className="col-3"></p>
+            <p className="col"></p>
             <Button className="btn btn-primary col-3" onClick={deleteTimer}>
               Delete
             </Button>
