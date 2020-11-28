@@ -34,51 +34,65 @@ export default () => {
     setTimers(newList)
     navigate("/timers")
   }
-
   return (
     <Layout>
       <main>
       <section>
-        <h3>Edit Timer: </h3>
-        {/*<div className="box">*/}
-        {/*  {timers.map((timer, idx) => (*/}
-        {/*    <Group key={idx} className="row">*/}
-        {/*      <p className="col-10" >*/}
-        {/*        {timer.title}*/}
-        {/*      </p>*/}
-        {/*    </Group>*/}
-        {/*  </div>*/}
+        <br/>
+          <h2>Edit Timer</h2> *(at the moment time must be inputted in as seconds).
       </section>
       <section className={"ttl-btn"}>
-        <br />
+        <hr/>
+        <br/>
         <Form {...form}>
           <div className="form-group">
             <div className="row">
               <div className="col">
-                <FormLabel {...form} name="title" className="fn">
-                  <h5>Title</h5>
+                <FormLabel {...form} name="title" className="col">
+                  <h4>Title</h4>
                 </FormLabel>
                 <FormInput
                   {...form}
                   name="title"
                   type="text"
-                  className="fn form-control"
+                  className="col-8 form-control"
                   placeholder="Enter Timer Title"
                 ></FormInput>
               </div>
             </div>
           </div>
+
+
+          <div className="form-group">
+            <div className="row">
+                <label className="col">
+                  <h4>Calculate Minutes to Seconds</h4>
+                </label>
+            </div>
+            <div className={"row"}>
+                <input  type="number"
+                  placeholder="Enter Minutes"></input>
+              &nbsp; &nbsp;
+                <h5 > X 60 </h5>
+              &nbsp; &nbsp;
+              <button value="">= </button>
+            </div>
+          </div>
+
+
+
+
           <div className="form-group">
             <div className="row">
               <div className="col">
-                <FormLabel {...form} className="fn" name="workPeriod">
-                  Work Time
+                <FormLabel {...form} className="col" name="workPeriod">
+                  <h4>Work Time</h4>
                 </FormLabel>
                 <FormInput
                   {...form}
                   name="workPeriod"
                   type="text"
-                  className="fn form-control"
+                  className="col-8 form-control"
                   placeholder="Enter Work Time"
                 ></FormInput>
               </div>
@@ -87,14 +101,14 @@ export default () => {
           <div className="form-group">
             <div className="row">
               <div className="col">
-                <FormLabel {...form} className="fn" name="shortBreak">
-                  Rest Time
+                <FormLabel {...form} className="col" name="shortBreak">
+                  <h4>Rest Time</h4>
                 </FormLabel>
                 <FormInput
                   {...form}
                   name="shortBreak"
                   type="text"
-                  className="fn form-control"
+                  className="col-8 form-control"
                   placeholder="Enter Rest Time"
                 ></FormInput>
               </div>
@@ -103,11 +117,9 @@ export default () => {
           <div className="form-group">
             <div className="row">
               <div className="col">
-                <FormLabel {...form} className="fn" name="workAudio">
-                  <h5>Sound for Work Period </h5>
+                <FormLabel {...form} className="col" name="workAudio">
+                  <h4>Sound for Work Period </h4>
                 </FormLabel>
-                &nbsp;
-                &nbsp;
                 <select className={"col"} id="options" name="sound_work_period">
                   <option value="None">None</option>
                   <option value="A Playlist">A Playlist</option>
@@ -116,12 +128,13 @@ export default () => {
               </div>
             </div>
           </div>
+          <br/>
           <div className={"row"}>
-            <FormSubmitButton {...form} className="btn btn-primary col">
+            <FormSubmitButton {...form} className="btn btn-primary col-4 save">
               Save
             </FormSubmitButton>
             <p className="col"></p>
-            <Button className="btn btn-primary col-3" onClick={deleteTimer}>
+            <Button className="btn btn-primary col-4 del" onClick={deleteTimer}>
               Delete
             </Button>
           </div>

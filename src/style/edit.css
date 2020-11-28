@@ -4,3 +4,21 @@ main {
     height: 1000px;
     width: 100%;
 }
+
+Button.save {
+    background-color: green;
+}
+
+Button.del
+{
+    background-color: red;
+}
+
+select {
+    height: 40px;
+}
+
+.title {
+    background-color: cornflowerblue;
+    border-color: cornflowerblue;
+}
