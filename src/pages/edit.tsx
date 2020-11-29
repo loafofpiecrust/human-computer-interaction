@@ -71,8 +71,6 @@ export default () => {
               </div>
             </div>
           </div>
-
-
           <div className="form-group">
             <div className="row">
                 <label className="col">
@@ -88,10 +86,6 @@ export default () => {
               <button >= </button>
             </div>
           </div>
-
-
-
-
           <div className="form-group">
             <div className="row">
               <div className="col">
