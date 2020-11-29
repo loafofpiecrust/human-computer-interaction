@@ -15,11 +15,7 @@ export default () => {
   const [currentIndex, setCurrentIndex] = useTimerIndex<number>()
   return (
     <Layout>
-      <section>
-        <br/>
-        <h2>Create New Timer</h2> *(at the moment time must be inputted in as seconds).
-      </section>
-      <hr/>
+      <br/>
       <section className={"ttl-btn"}>
         <div className={"row"}>
           <h2 className={"col-8"}>Your Timers</h2>
