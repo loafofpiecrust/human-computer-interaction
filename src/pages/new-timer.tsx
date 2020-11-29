@@ -27,6 +27,14 @@ export default () => {
   return (
     <Layout>
       <main>
+        <section>
+          <br/>
+          <h2>Create New Timer</h2>
+          *(at the moment time must be inputted in as seconds).
+          <br/>
+          **(the default is 25 work minutes and 5 rest minutes).
+        </section>
+        <hr/>
       <section className={"ttl-btn"}>
         <br />
         <Form {...form}>
@@ -44,6 +52,21 @@ export default () => {
                   placeholder="Enter Timer Title"
                 ></FormInput>
               </div>
+            </div>
+          </div>
+          <div className="form-group">
+            <div className="row">
+              <label className="col">
+                <h4>Calculate Minutes to Seconds</h4>
+              </label>
+            </div>
+            <div className={"row"}>
+              <input  type="text"
+                      placeholder="Enter Minutes" id={"num_2"}></input>
+              &nbsp; &nbsp;
+              <h5 > X 60 </h5>
+              &nbsp; &nbsp;
+              <button >= </button>
             </div>
           </div>
           <div className="form-group">
