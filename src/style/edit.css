@@ -7,11 +7,15 @@ main {
 
 Button.save {
     background-color: green;
+    font-weight: bold;
+    color: black;
 }
 
 Button.del
 {
     background-color: red;
+    font-weight: bold;
+    color: black;
 }
 
 select {
