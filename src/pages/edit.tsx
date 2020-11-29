@@ -73,21 +73,6 @@ export default () => {
           </div>
           <div className="form-group">
             <div className="row">
-                <label className="col">
-                  <h4>Calculate Minutes to Seconds</h4>
-                </label>
-            </div>
-            <div className={"row"}>
-                <input  type="text"
-                  placeholder="Enter Minutes" id={"num_2"}></input>
-              &nbsp; &nbsp;
-                <h5 > X 60 </h5>
-              &nbsp; &nbsp;
-              <button >= </button>
-            </div>
-          </div>
-          <div className="form-group">
-            <div className="row">
               <div className="col">
                 <FormLabel {...form} className="col" name="workPeriod">
                   <h4>Work Time</h4>
