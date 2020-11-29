@@ -16,3 +16,14 @@ main {
     height: 1000px;
     width: 100%;
 }
+
+.ctimer {
+    background-color: gray;
+    color: black;
+    font-weight: bold;
+}
+a.cancel {
+    background-color: navajowhite;
+    color: black;
+    font-weight: bold;
+}
