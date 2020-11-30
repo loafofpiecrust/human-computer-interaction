@@ -11,7 +11,7 @@ Button.save {
     color: black;
 }
 
-Button.del
+button.del
 {
     background-color: red;
     font-weight: bold;

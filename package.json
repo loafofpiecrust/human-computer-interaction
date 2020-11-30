@@ -3,7 +3,9 @@
   "description": "Personalized pomodoro timer that syncs with generated Spotify playlists",
   "version": "0.1.0",
   "author": "Taylor Snead <taylorsnead@gmail.com>",
-  "contributors": ["Jada Letts <jletts77@gmail.com>"],
+  "contributors": [
+    "Jada Letts <jletts77@gmail.com>"
+  ],
   "license": "MIT",
   "scripts": {
     "start": "gatsby develop",
@@ -12,6 +14,7 @@
   "dependencies": {
     "@emotion/react": "^11.1.1",
     "@fortawesome/fontawesome-svg-core": "^1.2.32",
+    "@fortawesome/free-regular-svg-icons": "^5.15.1",
     "@fortawesome/free-solid-svg-icons": "^5.15.1",
     "@fortawesome/react-fontawesome": "^0.1.12",
     "bootstrap": "^4.5.3",

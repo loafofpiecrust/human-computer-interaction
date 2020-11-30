@@ -32,3 +32,13 @@ h1 {
 section.ttl-btn {
   text-align: center;
 }
+
+button.bttl {
+  background-color: gray;
+  font-weight: bold;
+}
+
+.btn-edit {
+  background-color: black;
+  color: white;
+}
