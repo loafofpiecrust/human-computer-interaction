@@ -9,8 +9,6 @@ import {
   unstable_FormInput as FormInput,
   unstable_FormSubmitButton as FormSubmitButton,
 } from "reakit/Form"
-import "../style/NewTimer.css"
-import "bootstrap/dist/css/bootstrap.css"
 import "@fortawesome/free-solid-svg-icons"
 import "@fortawesome/react-fontawesome"
 
@@ -26,22 +24,12 @@ export default () => {
 
   return (
     <Layout>
-      <main>
-        <section>
-          <br/>
-          <h2>Create New Timer</h2>
-          *(at the moment time must be inputted in as seconds).
-          <br/>
-          **(the default is 25 work minutes and 5 rest minutes).
-        </section>
-        <hr/>
       <section className={"ttl-btn"}>
-        <br />
         <Form {...form}>
           <div className="form-group">
             <div className="row">
               <div className="col">
-                <FormLabel {...form} name="title" >
+                <FormLabel {...form} name="title">
                   <h4>Title</h4>
                 </FormLabel>
                 <FormInput
@@ -89,7 +77,7 @@ export default () => {
           <div className="form-group">
             <div className="row">
               <div className="col">
-                <FormLabel {...form} className="col" name="workAudio" >
+                <FormLabel {...form} className="col" name="workAudio">
                   <h4>Sound for Work Period</h4>
                 </FormLabel>
                 <select id="options" name="sound_work_period" className="col">
@@ -100,27 +88,15 @@ export default () => {
               </div>
             </div>
           </div>
-          <br/>
+
           <FormSubmitButton {...form} className="col-4 btn btn-primary ctimer">
             Create Timer
           </FormSubmitButton>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <a href={"/timers"} className={"col-4 btn btn-primary cancel"}>Cancel</a>
+          <a href={"/timers"} className={"col-4 btn btn-primary cancel"}>
+            Cancel
+          </a>
         </Form>
       </section>
-      </main>
     </Layout>
   )
 }

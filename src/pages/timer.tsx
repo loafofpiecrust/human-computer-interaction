@@ -4,6 +4,8 @@ import { Group } from "reakit/Group"
 import { Button } from "reakit/Button"
 import { useCurrentTimer, Timer, Period } from "../state"
 import Layout from "../layout"
+import * as style from "../style/new-timer"
+import { rhythm } from "../style/typography"
 
 export default () => {
   const [timer, setTimer] = useCurrentTimer()
@@ -30,10 +32,17 @@ export default () => {
 
   return (
     <Layout>
-      <header className="row">
-        <div style={{ flexGrow: 1 }}>
+      <header css={style.row}>
+        <div
+          css={{
+            display: "flex",
+            flexFlow: "column",
+            justifyContent: "center",
+            flexGrow: 1,
+          }}
+        >
           <h2>{timer.title}</h2>
-          <h3>{periodType} Period</h3>
+          <span>{periodType} Period</span>
         </div>
         <div>
           <div>{displaySeconds(timer.workPeriod)} work</div>
@@ -54,12 +63,10 @@ export default () => {
         onComplete={progressInterval}
         isPaused={paused}
       />
-      <Button onClick={() => setPaused(!paused)} className="btn btn-secondary">
+      <Button onClick={() => setPaused(!paused)}>
         {paused ? "Continue" : "Pause"}
       </Button>
-      <Button onClick={() => navigate("/timers")} className="btn btn-secondary">
-        Cancel
-      </Button>
+      <Button onClick={() => navigate("/timers")}>Cancel</Button>
     </Layout>
   )
 }
@@ -76,6 +83,12 @@ const Countdown = (props: {
   isPaused?: boolean
 }) => {
   const [seconds, setSeconds] = useState(props.totalSeconds)
+
+  // If the total changes, start the timer over.
+  useEffect(() => {
+    setSeconds(props.totalSeconds)
+  }, [props.totalSeconds])
+
   useEffect(() => {
     if (seconds > 0 && !props.isPaused) {
       const interval = setInterval(() => {
@@ -89,7 +102,7 @@ const Countdown = (props: {
 
   return (
     <>
-      <div style={{ fontSize: "2rem" }}>
+      <div css={{ fontSize: "2rem" }}>
         {displaySeconds(seconds)} / {displaySeconds(props.totalSeconds)}
       </div>
     </>
@@ -106,7 +119,7 @@ const PeriodTimeline = (props: {
     periods.push(
       <div
         key={(i + 1) * 2}
-        style={{
+        css={{
           flexGrow: props.workPeriod,
           backgroundColor: "firebrick",
           height: 16,
@@ -117,7 +130,7 @@ const PeriodTimeline = (props: {
       periods.push(
         <div
           key={(i + 1) * 2 + 1}
-          style={{
+          css={{
             flexGrow: props.shortBreakPeriod,
             backgroundColor: "aquamarine",
             height: 16,
@@ -126,5 +139,5 @@ const PeriodTimeline = (props: {
       )
     }
   }
-  return <Group className="row">{periods}</Group>
+  return <Group css={[style.row, { marginTop: rhythm(0.5) }]}>{periods}</Group>
 }

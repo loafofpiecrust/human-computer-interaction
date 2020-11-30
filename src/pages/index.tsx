@@ -1,14 +1,14 @@
 import React from "react"
-import "../style/index.css"
+import { Link } from "gatsby"
+import Layout from "../layout"
 
 export default () => (
-  <main>
-    <h1>Personalized Music Timeer</h1>
-    <a href={"/timers"}>Link to Project</a>
+  <Layout>
+    <Link to="/timers">Link to Project</Link>
     <section>
       <h2>Authors</h2>
-        <p>Taylor Snead</p>
-        <p>Jada Letts</p>
+      <p>Taylor Snead</p>
+      <p>Jada Letts</p>
     </section>
     <section>
       <h2>Requirement Analysis</h2>
@@ -36,5 +36,5 @@ export default () => (
         View Google Slides
       </a>
     </section>
-  </main>
+  </Layout>
 )

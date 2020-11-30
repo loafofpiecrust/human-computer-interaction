@@ -1,36 +1,29 @@
 import React from "react"
-import { Link, navigate } from "gatsby"
+import { navigate } from "gatsby"
+import { css } from "@emotion/react"
 import { Button } from "reakit/Button"
 import { Group } from "reakit/Group"
 import { useTimers, Timer, useTimerIndex } from "../state"
 import Layout from "../layout"
-import "../style/timer.css"
-import "bootstrap/dist/css/bootstrap.css"
+import * as style from "../style/new-timer"
 import "@fortawesome/free-solid-svg-icons"
 import "@fortawesome/react-fontawesome"
-
 
 export default () => {
   const [timers, setTimers] = useTimers<Timer[]>([])
   const [currentIndex, setCurrentIndex] = useTimerIndex<number>()
   return (
     <Layout>
-      <br/>
-      <section className={"ttl-btn"}>
-        <div className={"row"}>
-          <h2 className={"col-8"}>Your Timers</h2>
-
-          <Button as={Link} to="/new-timer" className={"btn btn-primary col-2"}>
-            New Timer
-          </Button>
-        </div>
-      </section>
+      <header css={[style.row, { justifyContent: "space-between" }]}>
+        <h2>Your Timers</h2>
+        <Button onClick={() => navigate("/new-timer")}>New Timer</Button>
+      </header>
       <br />
-      <div className="box">
+      <div css={style.box}>
         {timers.map((timer, idx) => (
-          <Group key={idx} className="row">
+          <Group key={idx} css={style.row}>
             <Button
-              className="col-10"
+              css={timerItem}
               onClick={() => {
                 setCurrentIndex(idx)
                 navigate("/timer")
@@ -39,7 +32,7 @@ export default () => {
               {timer.title}
             </Button>
             <Button
-              className="col-2"
+              css={timerEdit}
               onClick={() => {
                 setCurrentIndex(idx)
                 navigate("/edit")
@@ -53,3 +46,11 @@ export default () => {
     </Layout>
   )
 }
+
+const timerItem = css({
+  flexGrow: 10,
+})
+
+const timerEdit = css({
+  width: "max-content",
+})

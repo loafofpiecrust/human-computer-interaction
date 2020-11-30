@@ -1,4 +1,6 @@
 import React from "react"
+import { css } from "@emotion/react"
+import * as style from "../style/new-timer"
 import { Timer, useTimers, useTimerIndex } from "../state"
 import Layout from "../layout"
 import { Button } from "reakit/Button"
@@ -10,8 +12,6 @@ import {
   unstable_FormInput as FormInput,
   unstable_FormSubmitButton as FormSubmitButton,
 } from "reakit/Form"
-import "../style/edit.css"
-import "bootstrap/dist/css/bootstrap.css"
 import "@fortawesome/free-solid-svg-icons"
 import "@fortawesome/react-fontawesome"
 
@@ -35,101 +35,76 @@ export default () => {
     navigate("/timers")
   }
 
-  function multiply() {
-    var num1 = 60;
-    var num2 = document.getElementById("num_2");
-    // @ts-ignore
-    var result = num1 * num2;
-  }
-
-  // @ts-ignore
-  // @ts-ignore
   return (
     <Layout>
-      <main>
+      <header>
+        <h2>Edit Timer</h2>
+      </header>
       <section>
-        <br/>
-          <h2>Edit Timer</h2> *(at the moment time must be inputted in as seconds).
-      </section>
-        <hr/>
-      <section className={"ttl-btn"}>
-        <br/>
         <Form {...form}>
-          <div className="form-group">
-            <div className="row">
-              <div className="col">
-                <FormLabel {...form} name="title" className="col">
-                  <h4>Title</h4>
-                </FormLabel>
-                <FormInput
-                  {...form}
-                  name="title"
-                  type="text"
-                  className="col-8 form-control"
-                  placeholder="Enter Timer Title"
-                ></FormInput>
-              </div>
-            </div>
+          <div css={formGroup}>
+            <FormLabel {...form} name="title" className="col">
+              Title
+            </FormLabel>
+            <FormInput
+              {...form}
+              name="title"
+              type="text"
+              className="col-8 form-control"
+              placeholder="Enter Timer Title"
+            ></FormInput>
           </div>
-          <div className="form-group">
-            <div className="row">
-              <div className="col">
-                <FormLabel {...form} className="col" name="workPeriod">
-                  <h4>Work Time</h4>
-                </FormLabel>
-                <FormInput
-                  {...form}
-                  name="workPeriod"
-                  type="text"
-                  className="col-8 form-control"
-                  placeholder="Enter Work Time"
-                ></FormInput>
-              </div>
-            </div>
+
+          <div css={formGroup}>
+            <FormLabel {...form} className="col" name="workPeriod">
+              Work Time
+            </FormLabel>
+            <FormInput
+              {...form}
+              name="workPeriod"
+              type="text"
+              className="col-8 form-control"
+              placeholder="Enter Work Time"
+            ></FormInput>
           </div>
-          <div className="form-group">
-            <div className="row">
-              <div className="col">
-                <FormLabel {...form} className="col" name="shortBreak">
-                  <h4>Rest Time</h4>
-                </FormLabel>
-                <FormInput
-                  {...form}
-                  name="shortBreak"
-                  type="text"
-                  className="col-8 form-control"
-                  placeholder="Enter Rest Time"
-                ></FormInput>
-              </div>
-            </div>
+          <div css={formGroup}>
+            <FormLabel {...form} className="col" name="shortBreak">
+              Rest Time
+            </FormLabel>
+            <FormInput
+              {...form}
+              name="shortBreak"
+              type="text"
+              className="col-8 form-control"
+              placeholder="Enter Rest Time"
+            ></FormInput>
           </div>
-          <div className="form-group">
-            <div className="row">
-              <div className="col">
-                <FormLabel {...form} className="col" name="workAudio">
-                  <h4>Sound for Work Period </h4>
-                </FormLabel>
-                <select className={"col"} id="options" name="sound_work_period">
-                  <option value="None">None</option>
-                  <option value="A Playlist">A Playlist</option>
-                  <option value="Our Recommendation">Our Recommendation</option>
-                </select>
-              </div>
-            </div>
+          <div css={formGroup}>
+            <FormLabel {...form} className="col" name="workAudio">
+              Sound for Work Period
+            </FormLabel>
+            <select className={"col"} id="options" name="sound_work_period">
+              <option value="None">None</option>
+              <option value="A Playlist">A Playlist</option>
+              <option value="Our Recommendation">Our Recommendation</option>
+            </select>
           </div>
-          <br/>
-          <div className={"row"}>
+          <div css={style.row}>
             <FormSubmitButton {...form} className="btn btn-primary col-4 save">
               Save
             </FormSubmitButton>
-            <p className="col"></p>
             <Button className="btn btn-primary col-4 del" onClick={deleteTimer}>
               Delete
             </Button>
           </div>
         </Form>
       </section>
-      </main>
     </Layout>
   )
 }
+
+const formGroup = css({
+  display: "flex",
+  flexFlow: "row",
+  alignItems: "center",
+})
