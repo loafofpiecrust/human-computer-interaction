@@ -16,7 +16,14 @@ export default () => {
     <Layout>
       <header css={[style.row, { justifyContent: "space-between" }]}>
         <h2>Your Timers</h2>
-        <Button onClick={() => navigate("/new-timer")}>New Timer</Button>
+        <Button
+          onClick={() => {
+            setCurrentIndex(null)
+            navigate("/edit")
+          }}
+        >
+          New Timer
+        </Button>
       </header>
       <br />
       <div css={style.box}>

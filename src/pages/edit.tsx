@@ -1,7 +1,7 @@
 import React from "react"
 import { css } from "@emotion/react"
 import * as style from "../style/new-timer"
-import { Timer, useTimers, useTimerIndex } from "../state"
+import { Timer, useTimers, useTimerIndex, defaultTimer } from "../state"
 import Layout from "../layout"
 import { Button } from "reakit/Button"
 import { navigate } from "gatsby"
@@ -16,14 +16,26 @@ import "@fortawesome/free-solid-svg-icons"
 import "@fortawesome/react-fontawesome"
 
 export default () => {
-  const [timerIndex] = useTimerIndex()
+  const [timerIndex] = useTimerIndex(null)
+  const isNew = timerIndex === null
   const [timers, setTimers] = useTimers<Timer[]>([])
   const form = useFormState({
-    values: timers[timerIndex!],
-    onSubmit: (timer) => {
-      const newList = [...timers]
-      newList[timerIndex!] = timer
-      setTimers(newList)
+    values: isNew ? defaultTimer : timers[timerIndex],
+    onSubmit: (values: any) => {
+      const timer: Timer = {
+        ...values,
+        shortBreak: Number.parseInt(values.shortBreak),
+        longBreak: Number.parseInt(values.longBreak),
+        workPeriod: Number.parseInt(values.workPeriod),
+        intervals: Number.parseInt(values.intervals),
+      }
+      if (isNew) {
+        setTimers([...timers, timer])
+      } else {
+        const newList = [...timers]
+        newList[timerIndex!] = timer
+        setTimers(newList)
+      }
       navigate("/timers")
     },
   })
@@ -38,7 +50,7 @@ export default () => {
   return (
     <Layout>
       <header>
-        <h2>Edit Timer</h2>
+        <h2>{isNew ? "New Timer" : "Edit Timer"}</h2>
       </header>
       <section>
         <Form {...form}>
@@ -50,7 +62,6 @@ export default () => {
               {...form}
               name="title"
               type="text"
-              className="col-8 form-control"
               placeholder="Enter Timer Title"
             ></FormInput>
           </div>
@@ -62,8 +73,7 @@ export default () => {
             <FormInput
               {...form}
               name="workPeriod"
-              type="text"
-              className="col-8 form-control"
+              type="number"
               placeholder="Enter Work Time"
             ></FormInput>
           </div>
@@ -74,8 +84,7 @@ export default () => {
             <FormInput
               {...form}
               name="shortBreak"
-              type="text"
-              className="col-8 form-control"
+              type="number"
               placeholder="Enter Rest Time"
             ></FormInput>
           </div>
