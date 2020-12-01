@@ -1,7 +1,7 @@
 import React from "react"
 import { Helmet } from "react-helmet"
 import { Global, css } from "@emotion/react"
-import theme from "./style/theme"
+import theme, { fullWidth } from "./style/theme"
 import { rhythm } from "./style/typography"
 import {} from "@emotion/react/types/css-prop.d"
 
@@ -28,6 +28,10 @@ const styles = css({
   main: {
     width: "100%",
     padding: rhythm(1),
+    display: "flex",
+    flexFlow: "column",
+    alignItems: "center",
+    "& > *": fullWidth,
   },
   input: {
     marginLeft: "15%",

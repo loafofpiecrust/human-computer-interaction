@@ -2,10 +2,13 @@ import React, { useEffect, useState } from "react"
 import { Link, navigate } from "gatsby"
 import { Group } from "reakit/Group"
 import { Button } from "reakit/Button"
+import Slider from "react-slider"
 import { useCurrentTimer, Timer, Period } from "../state"
 import Layout from "../layout"
+import theme from "../style/theme"
 import * as style from "../style/new-timer"
 import { rhythm } from "../style/typography"
+import { BsDiamond, BsCircleFill } from "react-icons/bs"
 
 export default () => {
   const [timer, setTimer] = useCurrentTimer()
@@ -18,15 +21,15 @@ export default () => {
     setInterval(intervalIndex + 1)
     if (periodType === Period.Work) {
       setPeriodType(Period.ShortBreak)
-      setTotalTime(totalTime + timer.workPeriod)
+      // setTotalTime(totalTime + timer.workPeriod)
     } else {
       setPeriodType(Period.Work)
 
-      if (periodType === Period.ShortBreak) {
-        setTotalTime(totalTime + timer.shortBreak)
-      } else if (periodType === Period.LongBreak) {
-        setTotalTime(totalTime + timer.longBreak)
-      }
+      // if (periodType === Period.ShortBreak) {
+      //   setTotalTime(totalTime + timer.shortBreak)
+      // } else if (periodType === Period.LongBreak) {
+      //   setTotalTime(totalTime + timer.longBreak)
+      // }
     }
   }
 
@@ -48,19 +51,27 @@ export default () => {
           <div>{displaySeconds(timer.workPeriod)} work</div>
           <div>{displaySeconds(timer.shortBreak)} rest</div>
           <div>{timer.intervalCount} intervals</div>
-          <div>{displaySeconds(totalTime)} passed</div>
+          <div>
+            <span css={{ fontFamily: theme.fonts.monospace }}>
+              {displaySeconds(totalTime)}
+            </span>{" "}
+            passed
+          </div>
         </div>
       </header>
       <PeriodTimeline
         intervalCount={4}
         workPeriod={timer.workPeriod}
         shortBreakPeriod={timer.shortBreak}
+        currentInterval={intervalIndex}
+        totalTime={totalTime}
       />
       <Countdown
         totalSeconds={
           periodType === Period.Work ? timer.workPeriod : timer.shortBreak
         }
         onComplete={progressInterval}
+        onChange={() => setTotalTime(totalTime + 1)}
         isPaused={paused}
       />
       <Button onClick={() => setPaused(!paused)}>
@@ -80,6 +91,7 @@ function displaySeconds(time: number) {
 const Countdown = (props: {
   totalSeconds: number
   onComplete: () => void
+  onChange: (seconds: number) => void
   isPaused?: boolean
 }) => {
   const [seconds, setSeconds] = useState(props.totalSeconds)
@@ -92,7 +104,9 @@ const Countdown = (props: {
   useEffect(() => {
     if (seconds > 0 && !props.isPaused) {
       const interval = setInterval(() => {
-        setSeconds(seconds - 1)
+        let newSecs = seconds - 1
+        props.onChange(newSecs)
+        setSeconds(newSecs)
       }, 1000)
       return () => clearInterval(interval)
     } else if (!props.isPaused) {
@@ -102,7 +116,7 @@ const Countdown = (props: {
 
   return (
     <>
-      <div css={{ fontSize: "2rem" }}>
+      <div css={{ fontSize: "2rem", fontFamily: theme.fonts.monospace }}>
         {displaySeconds(seconds)} / {displaySeconds(props.totalSeconds)}
       </div>
     </>
@@ -113,31 +127,62 @@ const PeriodTimeline = (props: {
   intervalCount: number
   workPeriod: number
   shortBreakPeriod: number
+  currentInterval: number
+  totalTime: number
 }) => {
-  const periods = []
+  const fullLength =
+    props.intervalCount * props.workPeriod +
+    props.intervalCount * (props.shortBreakPeriod - 1)
+  let marks = []
+  let total = 0
   for (let i = 0; i < props.intervalCount; i++) {
-    periods.push(
-      <div
-        key={(i + 1) * 2}
-        css={{
-          flexGrow: props.workPeriod,
-          backgroundColor: "firebrick",
-          height: 16,
-        }}
-      ></div>
-    )
-    if (i < props.intervalCount - 1) {
-      periods.push(
-        <div
-          key={(i + 1) * 2 + 1}
-          css={{
-            flexGrow: props.shortBreakPeriod,
-            backgroundColor: "aquamarine",
-            height: 16,
-          }}
-        ></div>
-      )
-    }
+    marks.push(total)
+    total += props.workPeriod
+    marks.push(total)
+    total += props.shortBreakPeriod
   }
-  return <Group css={[style.row, { marginTop: rhythm(0.5) }]}>{periods}</Group>
+
+  return (
+    <Slider
+      css={{ marginTop: rhythm(0.5), marginBottom: rhythm(0.5) }}
+      disabled={true}
+      value={props.totalTime}
+      min={0}
+      max={fullLength}
+      marks={marks}
+      renderMark={(props) => (
+        <span
+          {...props}
+          css={{ position: "absolute", backgroundColor: "white" }}
+        >
+          <BsDiamond size={16} />
+        </span>
+      )}
+      renderThumb={(props, state) => (
+        <div {...props}>
+          <BsCircleFill size={20} />
+        </div>
+      )}
+      renderTrack={(innerProps, state) => {
+        return (
+          <div
+            {...innerProps}
+            css={{
+              height: 24,
+              display: "flex",
+              flexFlow: "column",
+              justifyContent: "center",
+            }}
+          >
+            <div
+              css={{
+                borderBottom: "4px solid",
+                borderColor: state.index === 0 ? "gray" : "firebrick",
+              }}
+            />
+          </div>
+        )
+      }}
+    />
+  )
 }

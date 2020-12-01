@@ -12,8 +12,6 @@ import {
   unstable_FormInput as FormInput,
   unstable_FormSubmitButton as FormSubmitButton,
 } from "reakit/Form"
-import "@fortawesome/free-solid-svg-icons"
-import "@fortawesome/react-fontawesome"
 
 export default () => {
   const [timerIndex] = useTimerIndex(null)

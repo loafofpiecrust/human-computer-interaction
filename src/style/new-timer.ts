@@ -1,4 +1,5 @@
 import { css } from "@emotion/react"
+import { rhythm } from "./typography"
 
 export const row = css({
   display: "flex",
@@ -7,6 +8,7 @@ export const row = css({
 
 export const box = css({
   border: "3px solid black",
-  width: "100%",
+  borderRadius: 3,
   minHeight: "200px",
+  marginTop: rhythm(0.5),
 })

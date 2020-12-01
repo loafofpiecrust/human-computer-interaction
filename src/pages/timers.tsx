@@ -6,8 +6,6 @@ import { Group } from "reakit/Group"
 import { useTimers, Timer, useTimerIndex } from "../state"
 import Layout from "../layout"
 import * as style from "../style/new-timer"
-import "@fortawesome/free-solid-svg-icons"
-import "@fortawesome/react-fontawesome"
 
 export default () => {
   const [timers, setTimers] = useTimers<Timer[]>([])
@@ -25,7 +23,6 @@ export default () => {
           New Timer
         </Button>
       </header>
-      <br />
       <div css={style.box}>
         {timers.map((timer, idx) => (
           <Group key={idx} css={style.row}>
