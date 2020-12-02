@@ -66,4 +66,10 @@ const styles = css({
   button: {
     cursor: "pointer",
   },
+  h2: {
+    textAlign: "center",
+  },
+  Countdown: {
+    textAlign:"center",
+  },
 })
