@@ -72,4 +72,16 @@ const styles = css({
   Countdown: {
     textAlign:"center",
   },
+  ".cancel": {
+    border: "2px solid black"
+  },
+  ".pause": {
+    backgroundColor: "grey",
+    borderStyle:"none",
+
+  },
+  ".pause:hover": {
+    backgroundColor: "grey",
+    borderStyle:"none",
+  },
 })
