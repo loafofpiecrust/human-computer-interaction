@@ -12,3 +12,7 @@ export const box = css({
   minHeight: "200px",
   marginTop: rhythm(0.5),
 })
+
+export const btn = css({
+  padding: "12px 28px",
+})
