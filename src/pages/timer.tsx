@@ -9,6 +9,7 @@ import theme from "../style/theme"
 import * as style from "../style/new-timer"
 import { rhythm } from "../style/typography"
 import { BsDiamond, BsCircleFill } from "react-icons/bs"
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 export default () => {
   const [timer, setTimer] = useCurrentTimer()
@@ -66,6 +67,7 @@ export default () => {
         currentInterval={intervalIndex}
         totalTime={totalTime}
       />
+      <br/>
       <Countdown
         totalSeconds={
           periodType === Period.Work ? timer.workPeriod : timer.shortBreak
@@ -74,10 +76,14 @@ export default () => {
         onChange={() => setTotalTime(totalTime + 1)}
         isPaused={paused}
       />
-      <Button onClick={() => setPaused(!paused)}>
+      <br/>
+      <Button onClick={() => setPaused(!paused)} className={"btn btn-primary col cancel"}>
         {paused ? "Continue" : "Pause"}
       </Button>
-      <Button onClick={() => navigate("/timers")}>Cancel</Button>
+      <br/>
+      <Button onClick={() => navigate("/timers")} className={"btn btn-primary col pause"}>
+        Cancel
+      </Button>
     </Layout>
   )
 }
@@ -163,6 +169,7 @@ const PeriodTimeline = (props: {
           <BsCircleFill size={20} />
         </div>
       )}
+
       renderTrack={(innerProps, state) => {
         return (
           <div

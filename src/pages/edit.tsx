@@ -5,6 +5,11 @@ import { Timer, useTimers, useTimerIndex, defaultTimer } from "../state"
 import Layout from "../layout"
 import { Button } from "reakit/Button"
 import { navigate } from "gatsby"
+import 'bootstrap/dist/css/bootstrap.min.css'
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
+
 import {
   unstable_useFormState as useFormState,
   unstable_Form as Form,
@@ -12,6 +17,7 @@ import {
   unstable_FormInput as FormInput,
   unstable_FormSubmitButton as FormSubmitButton,
 } from "reakit/Form"
+
 
 export default () => {
   const [timerIndex] = useTimerIndex(null)
@@ -45,15 +51,25 @@ export default () => {
     navigate("/timers")
   }
 
+  function x(){
+    navigate("/timers")
+  }
+
   return (
     <Layout>
       <header>
-        <h2>{isNew ? "New Timer" : "Edit Timer"}</h2>
+        <div>
+          <button  className={"btn btn-primary"} onClick={x}>
+            <FontAwesomeIcon icon={faArrowLeft}></FontAwesomeIcon>
+          </button>
+          <h2  className={"col"}>{isNew ? "New Timer" : "Edit Timer"}</h2>
+        </div>
       </header>
       <section>
         <Form {...form}>
           <div css={formGroup}>
-            <FormLabel {...form} name="title" className="col">
+            <br/>
+            <FormLabel {...form} name="title" className="">
               Title
             </FormLabel>
             <FormInput
@@ -63,13 +79,13 @@ export default () => {
               placeholder="Enter Timer Title"
             ></FormInput>
           </div>
-
+          <br/>
           <div css={formGroup}>
             <FormLabel {...form} className="col" name="workPeriod">
               Work Time
             </FormLabel>
             <br/>
-            <FormLabel className={"col"}>Hours:&nbsp;&nbsp;&nbsp;</FormLabel>
+            <FormLabel>Hours:&nbsp;&nbsp;&nbsp;</FormLabel>
             <FormInput
               {...form}
               name="workPeriod"
@@ -77,13 +93,12 @@ export default () => {
               placeholder="Enter Hours"
             ></FormInput>
             <br/>
-            <FormLabel className={"col"}>Minutes:</FormLabel>
+            <FormLabel>Minutes:</FormLabel>
             <FormInput
               {...form}
               name="workPeriod"
               type="number"
               placeholder="Enter Minutes"
-              className={"col"}
             ></FormInput>
             <br/>
             <FormLabel>Seconds:</FormLabel>
@@ -92,16 +107,27 @@ export default () => {
               name="workPeriod"
               type="number"
               placeholder="Enter Seconds"
-              className={"col"}
             ></FormInput>
+            <br/>
+            <div css={formGroup}>
+              <FormLabel {...form} className="col" name="workAudio">
+                Sound for Work Period: &nbsp;
+              </FormLabel>
+              <select className={"col"} id="options" name="sound_work_period">
+                <option value="None">None</option>
+                <option value="A Playlist">A Playlist</option>
+                <option value="Our Recommendation">Our Recommendation</option>
+              </select>
+            </div>
           </div>
+            <br/>
 
           <div css={formGroup}>
             <FormLabel {...form} className="col" name="shortBreak">
               Rest Time
             </FormLabel>
             <br/>
-            <FormLabel className={"col"}>Hours:&nbsp;&nbsp;&nbsp;</FormLabel>
+            <FormLabel>Hours:&nbsp;&nbsp;&nbsp;</FormLabel>
             <FormInput
               {...form}
               name="shortBreak"
@@ -109,13 +135,12 @@ export default () => {
               placeholder="Enter Hours"
             ></FormInput>
             <br/>
-            <FormLabel className={"col"}>Minutes:</FormLabel>
+            <FormLabel>Minutes:</FormLabel>
             <FormInput
               {...form}
               name="shortBreak"
               type="number"
               placeholder="Enter Minutes"
-              className={"col"}
             ></FormInput>
             <br/>
             <FormLabel>Seconds:</FormLabel>
@@ -124,25 +149,31 @@ export default () => {
               name="shortBreak"
               type="number"
               placeholder="Enter Seconds"
-              className={"col"}
             ></FormInput>
           </div>
-
           <div css={formGroup}>
-            <FormLabel {...form} className="col" name="workAudio">
-              Sound for Work Period: &nbsp;
+            <FormLabel {...form} className="col" name="restAudio">
+              Sound for Rest Period: &nbsp;
             </FormLabel>
-            <select className={"col"} id="options" name="sound_work_period">
+            <select className={"col"} id="options" name="sound_rest_period">
               <option value="None">None</option>
               <option value="A Playlist">A Playlist</option>
               <option value="Our Recommendation">Our Recommendation</option>
             </select>
           </div>
-          <div css={style.row}>
-            <FormSubmitButton {...form} className="btn btn-primary col-4 save">
+          <br/>
+          <div>
+            <FormSubmitButton {...form} className="btn btn-primary save col-4">
               Save
             </FormSubmitButton>
-            <Button className="btn btn-primary col-4 del" onClick={deleteTimer}>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <Button className="btn btn-primary del col-4" onClick={deleteTimer}>
               Delete
             </Button>
           </div>
@@ -153,6 +184,6 @@ export default () => {
 }
 
 const formGroup = css({
-  flexFlow: "row",
   alignItems: "center",
+  textAlign: "center",
 })
