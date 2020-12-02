@@ -84,4 +84,8 @@ const styles = css({
     backgroundColor: "grey",
     borderStyle:"none",
   },
+  ".pause:active": {
+    backgroundColor: "grey",
+    borderStyle:"none",
+  },
 })
