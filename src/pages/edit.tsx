@@ -68,27 +68,69 @@ export default () => {
             <FormLabel {...form} className="col" name="workPeriod">
               Work Time
             </FormLabel>
+            <br/>
+            <FormLabel className={"col"}>Hours:&nbsp;&nbsp;&nbsp;</FormLabel>
             <FormInput
               {...form}
               name="workPeriod"
               type="number"
-              placeholder="Enter Work Time"
+              placeholder="Enter Hours"
+            ></FormInput>
+            <br/>
+            <FormLabel className={"col"}>Minutes:</FormLabel>
+            <FormInput
+              {...form}
+              name="workPeriod"
+              type="number"
+              placeholder="Enter Minutes"
+              className={"col"}
+            ></FormInput>
+            <br/>
+            <FormLabel>Seconds:</FormLabel>
+            <FormInput
+              {...form}
+              name="workPeriod"
+              type="number"
+              placeholder="Enter Seconds"
+              className={"col"}
             ></FormInput>
           </div>
+
           <div css={formGroup}>
             <FormLabel {...form} className="col" name="shortBreak">
               Rest Time
             </FormLabel>
+            <br/>
+            <FormLabel className={"col"}>Hours:&nbsp;&nbsp;&nbsp;</FormLabel>
             <FormInput
               {...form}
               name="shortBreak"
               type="number"
-              placeholder="Enter Rest Time"
+              placeholder="Enter Hours"
+            ></FormInput>
+            <br/>
+            <FormLabel className={"col"}>Minutes:</FormLabel>
+            <FormInput
+              {...form}
+              name="shortBreak"
+              type="number"
+              placeholder="Enter Minutes"
+              className={"col"}
+            ></FormInput>
+            <br/>
+            <FormLabel>Seconds:</FormLabel>
+            <FormInput
+              {...form}
+              name="shortBreak"
+              type="number"
+              placeholder="Enter Seconds"
+              className={"col"}
             ></FormInput>
           </div>
+
           <div css={formGroup}>
             <FormLabel {...form} className="col" name="workAudio">
-              Sound for Work Period
+              Sound for Work Period: &nbsp;
             </FormLabel>
             <select className={"col"} id="options" name="sound_work_period">
               <option value="None">None</option>
@@ -111,7 +153,6 @@ export default () => {
 }
 
 const formGroup = css({
-  display: "flex",
   flexFlow: "row",
   alignItems: "center",
 })
