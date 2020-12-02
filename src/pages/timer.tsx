@@ -77,11 +77,11 @@ export default () => {
         isPaused={paused}
       />
       <br/>
-      <Button onClick={() => setPaused(!paused)} className={"btn btn-primary col cancel"}>
+      <Button onClick={() => setPaused(!paused)} className={"btn btn-primary col pause"}>
         {paused ? "Continue" : "Pause"}
       </Button>
       <br/>
-      <Button onClick={() => navigate("/timers")} className={"btn btn-primary col pause"}>
+      <Button onClick={() => navigate("/timers")} className={"btn col-2 cancel"}>
         Cancel
       </Button>
     </Layout>
