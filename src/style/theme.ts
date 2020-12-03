@@ -3,9 +3,12 @@ import { css } from "@emotion/react"
 const theme = {
   colors: {
     header: "cornflowerblue",
+    confirm: "darkseagreen",
+    cancel: "indianred",
   },
   fonts: {
     monospace: "Courier New",
+    sans: `"Open Sans", "Arial", sans`,
   },
   mediaQueries: {
     small: "@media (min-width: 40em)",
@@ -23,5 +26,13 @@ export const fullWidth = css({
     width: "54rem",
   },
 })
+
+export const marginY = (value: string | number) =>
+  css({ marginTop: value, marginBottom: value })
+
+export const marginX = (value: string | number) =>
+  css({ marginLeft: value, marginRight: value })
+
+export const timespan = css({ fontFamily: theme.fonts.monospace })
 
 export default theme

@@ -4,6 +4,7 @@ import { rhythm } from "./typography"
 export const row = css({
   display: "flex",
   flexFlow: "row",
+  alignItems: "baseline",
 })
 
 export const box = css({
@@ -13,6 +14,7 @@ export const box = css({
   marginTop: rhythm(0.5),
 })
 
-export const btn = css({
-  padding: "12px 28px",
+export const iconButton = css({
+  border: "none",
+  background: "none",
 })

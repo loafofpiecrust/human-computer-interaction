@@ -46,14 +46,6 @@ const styles = css({
     },
   },
 
-  "Button.save": {
-    backgroundColor: "green",
-  },
-
-  "Button.del": {
-    backgroundColor: "red",
-  },
-
   select: {
     height: 40,
   },
@@ -65,27 +57,31 @@ const styles = css({
 
   button: {
     cursor: "pointer",
+    color: "black",
+    padding: `${rhythm(0.25)} ${rhythm(0.5)}`,
+    border: "none",
+    borderRadius: 10,
+    fontFamily: theme.fonts.sans,
   },
   h2: {
     textAlign: "center",
   },
   Countdown: {
-    textAlign:"center",
+    textAlign: "center",
   },
   ".cancel": {
-    border: "2px solid black"
+    border: "2px solid black",
   },
   ".pause": {
     backgroundColor: "grey",
-    borderStyle:"none",
-
+    borderStyle: "none",
   },
   ".pause:hover": {
     backgroundColor: "grey",
-    borderStyle:"none",
+    borderStyle: "none",
   },
   ".pause:active": {
     backgroundColor: "grey",
-    borderStyle:"none",
+    borderStyle: "none",
   },
 })

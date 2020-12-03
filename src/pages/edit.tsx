@@ -1,14 +1,12 @@
 import React from "react"
 import { css } from "@emotion/react"
 import * as style from "../style/new-timer"
+import theme from "../style/theme"
 import { Timer, useTimers, useTimerIndex, defaultTimer } from "../state"
 import Layout from "../layout"
 import { Button } from "reakit/Button"
 import { navigate } from "gatsby"
-import 'bootstrap/dist/css/bootstrap.min.css'
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-
+import { FaArrowLeft } from "react-icons/fa"
 
 import {
   unstable_useFormState as useFormState,
@@ -18,19 +16,27 @@ import {
   unstable_FormSubmitButton as FormSubmitButton,
 } from "reakit/Form"
 
-
 export default () => {
   const [timerIndex] = useTimerIndex(null)
   const isNew = timerIndex === null
   const [timers, setTimers] = useTimers<Timer[]>([])
+  const timer = isNew ? defaultTimer : timers[timerIndex]
   const form = useFormState({
-    values: isNew ? defaultTimer : timers[timerIndex],
+    values: {
+      ...timer,
+      workSeconds: Math.floor(timer.workPeriod % 60),
+      workMinutes: Math.floor((timer.workPeriod / 60) % 60),
+      workHours: Math.floor(timer.workPeriod / 3600),
+    },
     onSubmit: (values: any) => {
       const timer: Timer = {
         ...values,
         shortBreak: Number.parseInt(values.shortBreak),
         longBreak: Number.parseInt(values.longBreak),
-        workPeriod: Number.parseInt(values.workPeriod),
+        workPeriod:
+          Number.parseInt(values.workHours) * 3600 +
+          Number.parseInt(values.workMinutes) * 60 +
+          Number.parseInt(values.workSeconds),
         intervals: Number.parseInt(values.intervals),
       }
       if (isNew) {
@@ -51,24 +57,17 @@ export default () => {
     navigate("/timers")
   }
 
-  function x(){
-    navigate("/timers")
-  }
-
   return (
     <Layout>
-      <header>
-        <div>
-          <button  className={"btn btn-primary"} onClick={x}>
-            <FontAwesomeIcon icon={faArrowLeft}></FontAwesomeIcon>
-          </button>
-          <h2  className={"col"}>{isNew ? "New Timer" : "Edit Timer"}</h2>
-        </div>
+      <header css={style.row}>
+        <Button css={style.iconButton} onClick={() => navigate("/timers")}>
+          <FaArrowLeft />
+        </Button>
+        <h2>{isNew ? "New Timer" : "Edit Timer"}</h2>
       </header>
       <section>
         <Form {...form}>
           <div css={formGroup}>
-            <br/>
             <FormLabel {...form} name="title" className="">
               Title
             </FormLabel>
@@ -79,62 +78,59 @@ export default () => {
               placeholder="Enter Timer Title"
             ></FormInput>
           </div>
-          <br/>
           <div css={formGroup}>
-            <FormLabel {...form} className="col" name="workPeriod">
+            <FormLabel {...form} name="workPeriod">
               Work Time
             </FormLabel>
-            <br/>
-            <FormLabel>Hours:&nbsp;&nbsp;&nbsp;</FormLabel>
+            <br />
+            <FormLabel>Hours:</FormLabel>
             <FormInput
               {...form}
-              name="workPeriod"
+              name="workHours"
               type="number"
               placeholder="Enter Hours"
             ></FormInput>
-            <br/>
+            <br />
             <FormLabel>Minutes:</FormLabel>
             <FormInput
               {...form}
-              name="workPeriod"
+              name="workMinutes"
               type="number"
               placeholder="Enter Minutes"
             ></FormInput>
-            <br/>
+            <br />
             <FormLabel>Seconds:</FormLabel>
             <FormInput
               {...form}
-              name="workPeriod"
+              name="workSeconds"
               type="number"
               placeholder="Enter Seconds"
             ></FormInput>
-            <br/>
             <div css={formGroup}>
-              <FormLabel {...form} className="col" name="workAudio">
-                Sound for Work Period: &nbsp;
+              <FormLabel {...form} name="workAudio">
+                Sound for Work Period:
               </FormLabel>
-              <select className={"col"} id="options" name="sound_work_period">
+              <select id="options" name="sound_work_period">
                 <option value="None">None</option>
                 <option value="A Playlist">A Playlist</option>
                 <option value="Our Recommendation">Our Recommendation</option>
               </select>
             </div>
           </div>
-            <br/>
+          <br />
 
           <div css={formGroup}>
-            <FormLabel {...form} className="col" name="shortBreak">
+            <FormLabel {...form} name="shortBreak">
               Rest Time
             </FormLabel>
-            <br/>
-            <FormLabel>Hours:&nbsp;&nbsp;&nbsp;</FormLabel>
+            <FormLabel>Hours:</FormLabel>
             <FormInput
               {...form}
               name="shortBreak"
               type="number"
               placeholder="Enter Hours"
             ></FormInput>
-            <br/>
+            <br />
             <FormLabel>Minutes:</FormLabel>
             <FormInput
               {...form}
@@ -142,7 +138,6 @@ export default () => {
               type="number"
               placeholder="Enter Minutes"
             ></FormInput>
-            <br/>
             <FormLabel>Seconds:</FormLabel>
             <FormInput
               {...form}
@@ -153,7 +148,7 @@ export default () => {
           </div>
           <div css={formGroup}>
             <FormLabel {...form} className="col" name="restAudio">
-              Sound for Rest Period: &nbsp;
+              Sound for Rest Period:
             </FormLabel>
             <select className={"col"} id="options" name="sound_rest_period">
               <option value="None">None</option>
@@ -161,19 +156,17 @@ export default () => {
               <option value="Our Recommendation">Our Recommendation</option>
             </select>
           </div>
-          <br/>
           <div>
-            <FormSubmitButton {...form} className="btn btn-primary save col-4">
+            <FormSubmitButton
+              {...form}
+              css={{ backgroundColor: theme.colors.confirm }}
+            >
               Save
             </FormSubmitButton>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <Button className="btn btn-primary del col-4" onClick={deleteTimer}>
+            <Button
+              css={{ backgroundColor: theme.colors.cancel }}
+              onClick={deleteTimer}
+            >
               Delete
             </Button>
           </div>
