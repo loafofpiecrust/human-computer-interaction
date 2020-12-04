@@ -2,7 +2,7 @@ import React from "react"
 import { Helmet } from "react-helmet"
 import { Global, css } from "@emotion/react"
 import theme, { fullWidth } from "./style/theme"
-import { rhythm } from "./style/typography"
+import { rhythm, options } from "./style/typography"
 import {} from "@emotion/react/types/css-prop.d"
 
 const Layout = (props: { children: any; title?: string }) => (
@@ -10,7 +10,7 @@ const Layout = (props: { children: any; title?: string }) => (
     <Global styles={styles} />
     <Helmet title={props.title ?? "Personalized Music Timer"} />
     <header css={bright}>
-      <h1>Personalized Music Timer</h1>
+      <span>Personalized Music Timer</span>
     </header>
     <main>{props.children}</main>
   </>
@@ -19,9 +19,13 @@ export default Layout
 
 const bright = css({
   backgroundColor: theme.colors.header,
+  color: "white",
   paddingTop: rhythm(1),
-  paddingBottom: 1,
+  paddingBottom: rhythm(1),
   textAlign: "center",
+  fontSize: "1.5rem",
+  fontFamily: options.headerFontFamily.join(","),
+  fontWeight: "bold",
 })
 
 const styles = css({
@@ -34,10 +38,10 @@ const styles = css({
     "& > *": fullWidth,
   },
   input: {
-    marginLeft: "15%",
+    // marginLeft: "15%",
     maxWidth: 500,
     "&.fn, &.ln": {
-      marginLeft: "20%",
+      // marginLeft: "20%",
     },
   },
   label: {

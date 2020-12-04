@@ -9,6 +9,7 @@ import theme, { marginY, timespan } from "../style/theme"
 import * as style from "../style/new-timer"
 import { rhythm } from "../style/typography"
 import { BsDiamond, BsCircleFill } from "react-icons/bs"
+import { BreakQuiz } from "../break-quiz"
 
 export default () => {
   const [timer, setTimer] = useCurrentTimer()
@@ -33,7 +34,7 @@ export default () => {
   }
 
   return (
-    <Layout>
+    <Layout title={timer.title}>
       <header css={style.row}>
         <div
           css={{
@@ -44,7 +45,7 @@ export default () => {
             flexGrow: 1,
           }}
         >
-          <h2>{timer.title}</h2>
+          <h1>{timer.title}</h1>
           <span>{periodType} Period</span>
         </div>
         <Group>
@@ -69,20 +70,31 @@ export default () => {
         currentInterval={intervalIndex}
         totalTime={totalTime}
       />
-      <Countdown
-        totalSeconds={
-          periodType === Period.Work ? timer.workPeriod : timer.shortBreak
+      <BreakQuiz
+        timer={timer}
+        periodType={periodType}
+        increaseWorkPeriod={(x) =>
+          setTimer({ ...timer, workPeriod: timer.workPeriod + x })
         }
-        onComplete={progressInterval}
-        onChange={() => setTotalTime(totalTime + 1)}
-        isPaused={paused}
+        alternate={() => (
+          <>
+            <Countdown
+              totalSeconds={
+                periodType === Period.Work ? timer.workPeriod : timer.shortBreak
+              }
+              onComplete={progressInterval}
+              onChange={() => setTotalTime(totalTime + 1)}
+              isPaused={paused}
+            />
+            <div css={style.row}>
+              <Button onClick={() => setPaused(!paused)}>
+                {paused ? "Continue" : "Pause"}
+              </Button>
+              <Button onClick={() => navigate("/timers")}>Cancel</Button>
+            </div>
+          </>
+        )}
       />
-      <div css={style.row}>
-        <Button onClick={() => setPaused(!paused)}>
-          {paused ? "Continue" : "Pause"}
-        </Button>
-        <Button onClick={() => navigate("/timers")}>Cancel</Button>
-      </div>
     </Layout>
   )
 }
@@ -171,7 +183,7 @@ const PeriodTimeline = (props: {
       )}
       renderThumb={(props, state) => (
         <div {...props}>
-          <BsCircleFill size={20} />
+          <BsCircleFill size={16} />
         </div>
       )}
       renderTrack={(innerProps, state) => {
@@ -179,7 +191,7 @@ const PeriodTimeline = (props: {
           <div
             {...innerProps}
             css={{
-              height: 24,
+              height: 28,
               display: "flex",
               flexFlow: "column",
               justifyContent: "center",
@@ -188,7 +200,8 @@ const PeriodTimeline = (props: {
             <div
               css={{
                 borderBottom: "4px solid",
-                borderColor: state.index === 0 ? "gray" : "firebrick",
+                borderColor:
+                  state.index === 0 ? "lightgray" : theme.colors.header,
               }}
             />
           </div>

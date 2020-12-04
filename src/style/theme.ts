@@ -2,7 +2,7 @@ import { css } from "@emotion/react"
 
 const theme = {
   colors: {
-    header: "cornflowerblue",
+    header: "firebrick",
     confirm: "darkseagreen",
     cancel: "indianred",
   },

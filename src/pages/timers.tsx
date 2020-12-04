@@ -13,7 +13,7 @@ export default () => {
   return (
     <Layout>
       <header css={[style.row, { justifyContent: "space-between" }]}>
-        <h2>Your Timers</h2>
+        <h1>Your Timers</h1>
         <Button
           onClick={() => {
             setCurrentIndex(null)

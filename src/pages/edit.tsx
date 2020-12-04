@@ -15,28 +15,56 @@ import {
   unstable_FormInput as FormInput,
   unstable_FormSubmitButton as FormSubmitButton,
 } from "reakit/Form"
+import { rhythm } from "../style/typography"
+
+const breakdown = (seconds: number) => ({
+  seconds: Math.floor(seconds % 60),
+  minutes: Math.floor((seconds / 60) % 60),
+  hours: Math.floor(seconds / 3600),
+})
+
+const recompose = (
+  hours: number | string,
+  minutes: number | string,
+  seconds: number | string
+) =>
+  Number.parseInt(hours as string) * 3600 +
+  Number.parseInt(minutes as string) * 60 +
+  Number.parseInt(seconds as string)
 
 export default () => {
   const [timerIndex] = useTimerIndex(null)
   const isNew = timerIndex === null
   const [timers, setTimers] = useTimers<Timer[]>([])
   const timer = isNew ? defaultTimer : timers[timerIndex]
+  const work = breakdown(timer.workPeriod)
+  const shortBreak = breakdown(timer.shortBreak)
   const form = useFormState({
     values: {
       ...timer,
-      workSeconds: Math.floor(timer.workPeriod % 60),
-      workMinutes: Math.floor((timer.workPeriod / 60) % 60),
-      workHours: Math.floor(timer.workPeriod / 3600),
+      // Break down work period length.
+      workSeconds: work.seconds,
+      workMinutes: work.minutes,
+      workHours: work.hours,
+      // Break down break period length.
+      shortBreakSeconds: shortBreak.seconds,
+      shortBreakMinutes: shortBreak.minutes,
+      shortBreakHours: shortBreak.hours,
     },
     onSubmit: (values: any) => {
       const timer: Timer = {
         ...values,
-        shortBreak: Number.parseInt(values.shortBreak),
+        shortBreak: recompose(
+          values.shortBreakHours,
+          values.shortBreakMinutes,
+          values.shortBreakSeconds
+        ),
         longBreak: Number.parseInt(values.longBreak),
-        workPeriod:
-          Number.parseInt(values.workHours) * 3600 +
-          Number.parseInt(values.workMinutes) * 60 +
-          Number.parseInt(values.workSeconds),
+        workPeriod: recompose(
+          values.workHours,
+          values.workMinutes,
+          values.workHours
+        ),
         intervals: Number.parseInt(values.intervals),
       }
       if (isNew) {
@@ -63,12 +91,12 @@ export default () => {
         <Button css={style.iconButton} onClick={() => navigate("/timers")}>
           <FaArrowLeft />
         </Button>
-        <h2>{isNew ? "New Timer" : "Edit Timer"}</h2>
+        <h1>{isNew ? "New Timer" : "Edit Timer"}</h1>
       </header>
       <section>
         <Form {...form}>
           <div css={formGroup}>
-            <FormLabel {...form} name="title" css={{marginRight:33}}>
+            <FormLabel {...form} name="title" css={{ marginRight: 33 }}>
               Title
             </FormLabel>
             <FormInput
@@ -78,106 +106,119 @@ export default () => {
               placeholder="Enter Timer Title"
             ></FormInput>
           </div>
-          <br />
+
           <div css={formGroup}>
             <FormLabel {...form} name="workPeriod">
               Work Time
             </FormLabel>
-            <br />
-            <FormLabel css={{marginTop:10}}>Hours:</FormLabel>
             <FormInput
               {...form}
               name="workHours"
               type="number"
+              min={0}
               placeholder="Enter Hours"
-              css={{marginTop:10, marginLeft:133}}
+              css={narrow}
             ></FormInput>
-            <br />
-            <FormLabel css={{marginTop:10}}>Minutes:</FormLabel>
+            <FormLabel {...form} name="workHours">
+              h
+            </FormLabel>
             <FormInput
               {...form}
               name="workMinutes"
               type="number"
+              min={0}
               placeholder="Enter Minutes"
-              css={{marginTop:10}}
+              css={narrow}
             ></FormInput>
-            <br />
-            <FormLabel css={{marginTop:10}}>Seconds:</FormLabel>
+            <FormLabel {...form} name="workMinutes">
+              m
+            </FormLabel>
             <FormInput
               {...form}
               name="workSeconds"
               type="number"
+              min={0}
               placeholder="Enter Seconds"
-              css={{marginTop:10, marginBottom:10}}
+              css={narrow}
             ></FormInput>
-            <br/>
-            <div css={formGroup}>
-              <FormLabel {...form} name="workAudio">
-                Sound for Work Period:
-              </FormLabel>
-              <br/>
-              <select id="options" name="sound_work_period">
-                <option value="None">None</option>
-                <option value="A Playlist">A Playlist</option>
-                <option value="Our Recommendation">Our Recommendation</option>
-              </select>
-            </div>
+            <FormLabel {...form} name="workSeconds">
+              s
+            </FormLabel>
+            <p>How long to work before taking a break</p>
           </div>
-          <br />
 
           <div css={formGroup}>
-            <FormLabel {...form} name="shortBreak">
-              Rest Time
+            <FormLabel {...form} name="workAudio">
+              Sound for Work Period:
             </FormLabel>
-            <br />
-            <FormLabel css={{marginTop:10}}>Hours:</FormLabel>
-            <FormInput
-              {...form}
-              name="shortBreak"
-              type="number"
-              placeholder="Enter Hours"
-              css={{marginTop:10, marginLeft:133}}
-            ></FormInput>
-            <br />
-            <FormLabel css={{marginTop:10}}>Minutes:</FormLabel>
-            <FormInput
-              {...form}
-              name="shortBreak"
-              type="number"
-              placeholder="Enter Minutes"
-              css={{marginTop:10}}
-            ></FormInput>
-            <br />
-            <FormLabel css={{marginTop:10}}>Seconds:</FormLabel>
-            <FormInput
-              {...form}
-              name="shortBreak"
-              type="number"
-              placeholder="Enter Seconds"
-              css={{marginTop:10, marginBottom:10}}
-            ></FormInput>
+            <select id="options" name="sound_work_period">
+              <option value="None">None</option>
+              <option value="A Playlist">A Playlist</option>
+              <option value="Our Recommendation">Our Recommendation</option>
+            </select>
           </div>
+
+          <div css={formGroup}>
+            <FormLabel {...form}>Rest Time</FormLabel>
+            <FormInput
+              {...form}
+              name="shortBreakHours"
+              type="number"
+              min={0}
+              placeholder="Enter Hours"
+              css={narrow}
+            ></FormInput>
+            <FormLabel {...form} name="shortBreakHours">
+              h
+            </FormLabel>
+            <FormInput
+              {...form}
+              name="shortBreakMinutes"
+              type="number"
+              min={0}
+              max={120}
+              placeholder="Enter Minutes"
+              css={narrow}
+            ></FormInput>
+            <FormLabel {...form} name="shortBreakMinutes">
+              m
+            </FormLabel>
+            <FormInput
+              {...form}
+              name="shortBreakSeconds"
+              type="number"
+              min={0}
+              max={120}
+              placeholder="Enter Seconds"
+              css={narrow}
+            ></FormInput>
+            <FormLabel {...form} name="shortBreakSeconds">
+              s
+            </FormLabel>
+            <p>Length of your short break following every work period</p>
+          </div>
+
           <div css={formGroup}>
             <FormLabel {...form} className="col" name="restAudio">
               Sound for Rest Period:
             </FormLabel>
-            <br/>
+            <br />
             <select className={"col"} id="options" name="sound_rest_period">
               <option value="None">None</option>
               <option value="A Playlist">A Playlist</option>
               <option value="Our Recommendation">Our Recommendation</option>
             </select>
           </div>
-          <br/>
+
           <div>
             <FormSubmitButton
               {...form}
-              css={{ backgroundColor: theme.colors.confirm, marginLeft:200 }}
+              css={{ backgroundColor: theme.colors.confirm, marginLeft: 200 }}
             >
               Save
             </FormSubmitButton>
             <Button
-              css={{ backgroundColor: theme.colors.cancel, marginLeft:250 }}
+              css={{ backgroundColor: theme.colors.cancel, marginLeft: 250 }}
               onClick={deleteTimer}
             >
               Delete
@@ -191,5 +232,12 @@ export default () => {
 
 const formGroup = css({
   alignItems: "center",
-  textAlign: "center",
+  marginBottom: rhythm(0.5),
+})
+
+const narrow = css({
+  maxWidth: "5ch",
+  fontFamily: theme.fonts.monospace,
+  marginLeft: "1rem",
+  marginRight: 4,
 })
