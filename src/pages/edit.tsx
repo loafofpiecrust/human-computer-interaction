@@ -68,7 +68,7 @@ export default () => {
       <section>
         <Form {...form}>
           <div css={formGroup}>
-            <FormLabel {...form} name="title" className="">
+            <FormLabel {...form} name="title" css={{marginRight:33}}>
               Title
             </FormLabel>
             <FormInput
@@ -78,38 +78,44 @@ export default () => {
               placeholder="Enter Timer Title"
             ></FormInput>
           </div>
+          <br />
           <div css={formGroup}>
             <FormLabel {...form} name="workPeriod">
               Work Time
             </FormLabel>
             <br />
-            <FormLabel>Hours:</FormLabel>
+            <FormLabel css={{marginTop:10}}>Hours:</FormLabel>
             <FormInput
               {...form}
               name="workHours"
               type="number"
               placeholder="Enter Hours"
+              css={{marginTop:10, marginLeft:133}}
             ></FormInput>
             <br />
-            <FormLabel>Minutes:</FormLabel>
+            <FormLabel css={{marginTop:10}}>Minutes:</FormLabel>
             <FormInput
               {...form}
               name="workMinutes"
               type="number"
               placeholder="Enter Minutes"
+              css={{marginTop:10}}
             ></FormInput>
             <br />
-            <FormLabel>Seconds:</FormLabel>
+            <FormLabel css={{marginTop:10}}>Seconds:</FormLabel>
             <FormInput
               {...form}
               name="workSeconds"
               type="number"
               placeholder="Enter Seconds"
+              css={{marginTop:10, marginBottom:10}}
             ></FormInput>
+            <br/>
             <div css={formGroup}>
               <FormLabel {...form} name="workAudio">
                 Sound for Work Period:
               </FormLabel>
+              <br/>
               <select id="options" name="sound_work_period">
                 <option value="None">None</option>
                 <option value="A Playlist">A Playlist</option>
@@ -123,48 +129,55 @@ export default () => {
             <FormLabel {...form} name="shortBreak">
               Rest Time
             </FormLabel>
-            <FormLabel>Hours:</FormLabel>
+            <br />
+            <FormLabel css={{marginTop:10}}>Hours:</FormLabel>
             <FormInput
               {...form}
               name="shortBreak"
               type="number"
               placeholder="Enter Hours"
+              css={{marginTop:10, marginLeft:133}}
             ></FormInput>
             <br />
-            <FormLabel>Minutes:</FormLabel>
+            <FormLabel css={{marginTop:10}}>Minutes:</FormLabel>
             <FormInput
               {...form}
               name="shortBreak"
               type="number"
               placeholder="Enter Minutes"
+              css={{marginTop:10}}
             ></FormInput>
-            <FormLabel>Seconds:</FormLabel>
+            <br />
+            <FormLabel css={{marginTop:10}}>Seconds:</FormLabel>
             <FormInput
               {...form}
               name="shortBreak"
               type="number"
               placeholder="Enter Seconds"
+              css={{marginTop:10, marginBottom:10}}
             ></FormInput>
           </div>
           <div css={formGroup}>
             <FormLabel {...form} className="col" name="restAudio">
               Sound for Rest Period:
             </FormLabel>
+            <br/>
             <select className={"col"} id="options" name="sound_rest_period">
               <option value="None">None</option>
               <option value="A Playlist">A Playlist</option>
               <option value="Our Recommendation">Our Recommendation</option>
             </select>
           </div>
+          <br/>
           <div>
             <FormSubmitButton
               {...form}
-              css={{ backgroundColor: theme.colors.confirm }}
+              css={{ backgroundColor: theme.colors.confirm, marginLeft:200 }}
             >
               Save
             </FormSubmitButton>
             <Button
-              css={{ backgroundColor: theme.colors.cancel }}
+              css={{ backgroundColor: theme.colors.cancel, marginLeft:250 }}
               onClick={deleteTimer}
             >
               Delete
