@@ -17,4 +17,5 @@ export const box = css({
 export const iconButton = css({
   border: "none",
   background: "none",
+  ":hover": {color:"firebrick"},
 })
