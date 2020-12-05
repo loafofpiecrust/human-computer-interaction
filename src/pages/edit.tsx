@@ -89,7 +89,7 @@ export default () => {
     <Layout>
       <header css={style.row}>
         <Button css={style.iconButton} onClick={() => navigate("/timers")}>
-          <FaArrowLeft />
+          <FaArrowLeft size={"23px"}/>
         </Button>
         <h1>{isNew ? "New Timer" : "Edit Timer"}</h1>
       </header>
@@ -209,16 +209,16 @@ export default () => {
               <option value="Our Recommendation">Our Recommendation</option>
             </select>
           </div>
-
+          <br/>
           <div>
             <FormSubmitButton
               {...form}
-              css={{ backgroundColor: theme.colors.confirm, marginLeft: 200 }}
+              css={{ backgroundColor: theme.colors.confirm, marginLeft: 100, width:250 }}
             >
               Save
             </FormSubmitButton>
             <Button
-              css={{ backgroundColor: theme.colors.cancel, marginLeft: 250 }}
+              css={{ backgroundColor: theme.colors.cancel, marginLeft: 250, width:260 }}
               onClick={deleteTimer}
             >
               Delete
