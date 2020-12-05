@@ -10,7 +10,8 @@ const Layout = (props: { children: any; title?: string }) => (
     <Global styles={styles} />
     <Helmet title={props.title ?? "Personalized Music Timer"} />
     <header css={bright}>
-      <span>Personalized Music Timer</span>
+      <span className={"fn"}>Personalized Music Timer</span>
+      <img src={require('..//static/main.png')} css={{width: 70}}/>
     </header>
     <main>{props.children}</main>
   </>
