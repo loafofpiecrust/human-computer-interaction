@@ -6,7 +6,7 @@ import { Group } from "reakit/Group"
 import { useTimers, Timer, useTimerIndex } from "../state"
 import Layout from "../layout"
 import * as style from "../style/new-timer"
-import { FaArrowLeft, FaEdit } from "react-icons/fa"
+import { FaPlus, FaEdit, FaPlusCircle, FaPlusSquare, FaRegPlusSquare } from "react-icons/fa"
 
 export default () => {
   const [timers, setTimers] = useTimers<Timer[]>([])
@@ -15,14 +15,11 @@ export default () => {
     <Layout>
       <header css={[style.row, { justifyContent: "space-between" }]}>
         <h1>Your Timers</h1>
-        <Button
-          onClick={() => {
-            setCurrentIndex(null)
-            navigate("/edit")
-          }}
-        >
-          New Timer
-        </Button>
+          <FaRegPlusSquare size={30}
+            onClick={() => {
+              setCurrentIndex(null)
+              navigate("/edit")
+            }}/>
       </header>
       <div css={style.box}>
         {timers.map((timer, idx) => (
