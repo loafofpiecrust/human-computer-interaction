@@ -49,7 +49,7 @@ export default () => {
 }
 
 const timerItem = css({
-  flexGrow: 5,
+  flexGrow: 10,
 })
 
 const timerEdit = css({
