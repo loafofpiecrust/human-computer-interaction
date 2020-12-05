@@ -63,7 +63,7 @@ export default () => {
         workPeriod: recompose(
           values.workHours,
           values.workMinutes,
-          values.workHours
+          values.workSeconds
         ),
         intervals: Number.parseInt(values.intervals),
       }
@@ -89,7 +89,7 @@ export default () => {
     <Layout>
       <header css={style.row}>
         <Button css={style.iconButton} onClick={() => navigate("/timers")}>
-          <FaArrowLeft size={"23px"}/>
+          <FaArrowLeft size={24} />
         </Button>
         <h1>{isNew ? "New Timer" : "Edit Timer"}</h1>
       </header>
@@ -202,23 +202,29 @@ export default () => {
             <FormLabel {...form} className="col" name="restAudio">
               Sound for Rest Period:
             </FormLabel>
-            <br />
             <select className={"col"} id="options" name="sound_rest_period">
               <option value="None">None</option>
               <option value="A Playlist">A Playlist</option>
               <option value="Our Recommendation">Our Recommendation</option>
             </select>
           </div>
-          <br/>
           <div>
             <FormSubmitButton
               {...form}
-              css={{ backgroundColor: theme.colors.confirm, marginLeft: 100, width:250 }}
+              css={{
+                backgroundColor: theme.colors.confirm,
+                marginLeft: 100,
+                width: 250,
+              }}
             >
               Save
             </FormSubmitButton>
             <Button
-              css={{ backgroundColor: theme.colors.cancel, marginLeft: 250, width:260 }}
+              css={{
+                backgroundColor: theme.colors.cancel,
+                marginLeft: 250,
+                width: 260,
+              }}
               onClick={deleteTimer}
             >
               Delete
