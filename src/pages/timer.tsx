@@ -78,6 +78,7 @@ export default () => {
         }
         alternate={() => (
           <>
+            <br/>
             <Countdown
               totalSeconds={
                 periodType === Period.Work ? timer.workPeriod : timer.shortBreak
@@ -86,11 +87,14 @@ export default () => {
               onChange={() => setTotalTime(totalTime + 1)}
               isPaused={paused}
             />
+            <br/>
             <div css={style.row}>
-              <Button onClick={() => setPaused(!paused)}>
+              <Button css={{backgroundColor: theme.colors.pause, width:260}}
+              onClick={() => setPaused(!paused)}>
                 {paused ? "Continue" : "Pause"}
               </Button>
-              <Button onClick={() => navigate("/timers")}>Cancel</Button>
+              <Button css={{backgroundColor: theme.colors.cancel, marginLeft: 500, width:260}}
+                      onClick={() => navigate("/timers")}>Cancel</Button>
             </div>
           </>
         )}
