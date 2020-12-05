@@ -6,6 +6,7 @@ import { Group } from "reakit/Group"
 import { useTimers, Timer, useTimerIndex } from "../state"
 import Layout from "../layout"
 import * as style from "../style/new-timer"
+import { FaArrowLeft, FaEdit } from "react-icons/fa"
 
 export default () => {
   const [timers, setTimers] = useTimers<Timer[]>([])
@@ -35,15 +36,11 @@ export default () => {
             >
               {timer.title}
             </Button>
-            <Button
-              css={timerEdit}
-              onClick={() => {
-                setCurrentIndex(idx)
-                navigate("/edit")
-              }}
-            >
-              Edit
-            </Button>
+              <FaEdit css={timerEdit}
+                      onClick={() => {
+                        setCurrentIndex(idx)
+                        navigate("/edit")
+                      }}/>
           </Group>
         ))}
       </div>
@@ -52,9 +49,11 @@ export default () => {
 }
 
 const timerItem = css({
-  flexGrow: 10,
+  flexGrow: 5,
 })
 
 const timerEdit = css({
-  width: "max-content",
+  width: "50px",
+  backgroundColor:"white",
+  fontSize:"30px",
 })
