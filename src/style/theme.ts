@@ -5,6 +5,7 @@ const theme = {
     header: "firebrick",
     confirm: "darkseagreen",
     cancel: "indianred",
+    pause:"darkgray"
   },
   fonts: {
     monospace: "Courier New",
