@@ -5,6 +5,8 @@ import Layout from "../layout"
 export default () => (
   <Layout>
     <Link to="/timers">Link to Project</Link>
+    <h2>Evaluator Instructions</h2>
+    <a href="/Evaluator_Instructions.pdf">Download PDF</a>
     <section>
       <h2>Authors</h2>
       <p>Taylor Snead</p>
