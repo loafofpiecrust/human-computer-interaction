@@ -4,13 +4,18 @@ import Layout from "../layout"
 
 export default () => (
   <Layout>
-    <Link to="/timers">Link to Project</Link>
-    <h2>Evaluator Instructions</h2>
-    <a href="/Evaluator_Instructions.pdf">Download PDF</a>
     <section>
       <h2>Authors</h2>
       <p>Taylor Snead</p>
       <p>Jada Letts</p>
+    </section>
+    <section>
+      <h2>Evaluator Instructions</h2>
+      <a href="/Evaluator_Instructions.pdf">Download PDF</a>
+    </section>
+    <section>
+      <h2>Project</h2>
+      <Link to="/timers">Link to Project</Link>
     </section>
     <section>
       <h2>Requirement Analysis</h2>
