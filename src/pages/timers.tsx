@@ -33,11 +33,16 @@ export default () => {
             >
               {timer.title}
             </Button>
-              <FaEdit css={timerEdit}
-                      onClick={() => {
-                        setCurrentIndex(idx)
-                        navigate("/edit")
-                      }}/>
+
+            <Button
+              css={style.iconButton}
+              onClick={() => {
+                setCurrentIndex(idx)
+                navigate("/edit")
+              }}
+            >
+              <FaEdit size={24} />
+            </Button>
           </Group>
         ))}
       </div>
@@ -47,10 +52,4 @@ export default () => {
 
 const timerItem = css({
   flexGrow: 10,
-})
-
-const timerEdit = css({
-  width: "50px",
-  backgroundColor:"white",
-  fontSize:"30px",
 })

@@ -19,12 +19,12 @@ export const BreakQuiz = (p: {
   const [quizType, setQuizType] = useState<QuizType | null>(null)
 
   useEffect(() => {
-    if (p.periodType === Period.ShortBreak && p.timer.shortBreak > 30) {
+    if (p.periodType === Period.ShortBreak && p.timer.shortBreak >= 30) {
       setQuizType(QuizType.WorkDuration)
       // Stop the quiz after the timeout.
       const timer = setTimeout(() => {
         setQuizType(null)
-      }, p.timer.shortBreak / 2)
+      }, 10000)
       return () => clearTimeout(timer)
     }
   }, [p.periodType, p.timer])
@@ -36,7 +36,12 @@ export const BreakQuiz = (p: {
       <div css={{ marginTop: rhythm(0.5) }}>
         <div>Do you need more time to work?</div>
         <div css={row}>
-          <Button onClick={() => p.increaseWorkPeriod(10 * 60)}>
+          <Button
+            onClick={() => {
+              p.increaseWorkPeriod(10 * 60)
+              setQuizType(null)
+            }}
+          >
             <span css={timespan}>10:00</span> more work
           </Button>
           <Button onClick={() => setQuizType(null)}>Start break</Button>

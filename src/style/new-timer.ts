@@ -1,5 +1,6 @@
 import { css } from "@emotion/react"
 import { rhythm } from "./typography"
+import theme from "./theme"
 
 export const row = css({
   display: "flex",
@@ -17,5 +18,5 @@ export const box = css({
 export const iconButton = css({
   border: "none",
   background: "none",
-  ":hover": {color:"firebrick"},
+  "&:hover": { color: theme.colors.header },
 })

@@ -64,7 +64,7 @@ export default () => {
         </Group>
       </header>
       <PeriodTimeline
-        intervalCount={4}
+        intervalCount={timer.intervalCount}
         workPeriod={timer.workPeriod}
         shortBreakPeriod={timer.shortBreak}
         currentInterval={intervalIndex}
@@ -78,7 +78,6 @@ export default () => {
         }
         alternate={() => (
           <>
-            <br/>
             <Countdown
               totalSeconds={
                 periodType === Period.Work ? timer.workPeriod : timer.shortBreak
@@ -87,14 +86,23 @@ export default () => {
               onChange={() => setTotalTime(totalTime + 1)}
               isPaused={paused}
             />
-            <br/>
             <div css={style.row}>
-              <Button css={{backgroundColor: theme.colors.pause, width:260}}
-              onClick={() => setPaused(!paused)}>
+              <Button
+                css={{ backgroundColor: theme.colors.pause, width: 260 }}
+                onClick={() => setPaused(!paused)}
+              >
                 {paused ? "Continue" : "Pause"}
               </Button>
-              <Button css={{backgroundColor: theme.colors.cancel, marginLeft: 500, width:260}}
-                      onClick={() => navigate("/timers")}>Cancel</Button>
+              <Button
+                css={{
+                  backgroundColor: theme.colors.cancel,
+                  marginLeft: 500,
+                  width: 260,
+                }}
+                onClick={() => navigate("/timers")}
+              >
+                Cancel
+              </Button>
             </div>
           </>
         )}
@@ -156,10 +164,9 @@ const PeriodTimeline = (props: {
   currentInterval: number
   totalTime: number
 }) => {
-  const fullLength = Math.floor(
+  const fullLength =
     props.intervalCount * props.workPeriod +
-      (props.intervalCount - 1) * props.shortBreakPeriod
-  )
+    (props.intervalCount - 1) * props.shortBreakPeriod
   let marks = []
   let total = 0
   for (let i = 0; i < props.intervalCount; i++) {
