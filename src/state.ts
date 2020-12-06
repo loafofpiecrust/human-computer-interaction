@@ -1,4 +1,5 @@
 import createPersistedState from "use-persisted-state"
+import { Playlist } from "./playlist"
 
 export interface Timer {
   title: string
@@ -10,6 +11,7 @@ export interface Timer {
   longBreak: number
   intervalCount: number
   workAudio: string
+  playlist: Playlist | null
 }
 
 export enum Period {
@@ -25,6 +27,7 @@ export const defaultTimer: Timer = {
   longBreak: 50 * 60,
   intervalCount: 4,
   workAudio: "",
+  playlist: null,
 }
 
 export const useTimers = createPersistedState("timers")

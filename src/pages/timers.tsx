@@ -5,25 +5,29 @@ import { Button } from "reakit/Button"
 import { Group } from "reakit/Group"
 import { useTimers, Timer, useTimerIndex } from "../state"
 import Layout from "../layout"
-import * as style from "../style/new-timer"
-import { FaPlus, FaEdit, FaPlusCircle, FaPlusSquare, FaRegPlusSquare } from "react-icons/fa"
+import { row, iconButton, box } from "../style/new-timer"
+import { FaEdit, FaRegPlusSquare } from "react-icons/fa"
 
 export default () => {
   const [timers, setTimers] = useTimers<Timer[]>([])
   const [currentIndex, setCurrentIndex] = useTimerIndex<number>()
   return (
     <Layout>
-      <header css={[style.row, { justifyContent: "space-between" }]}>
+      <header css={[row, { justifyContent: "space-between" }]}>
         <h1>Your Timers</h1>
-          <FaRegPlusSquare size={30}
-            onClick={() => {
-              setCurrentIndex(null)
-              navigate("/edit")
-            }}/>
+        <Button
+          css={iconButton}
+          onClick={() => {
+            setCurrentIndex(null)
+            navigate("/edit")
+          }}
+        >
+          <FaRegPlusSquare size={24} />
+        </Button>
       </header>
-      <div css={style.box}>
+      <div css={box}>
         {timers.map((timer, idx) => (
-          <Group key={idx} css={style.row}>
+          <Group key={idx} css={row}>
             <Button
               css={timerItem}
               onClick={() => {
@@ -35,7 +39,7 @@ export default () => {
             </Button>
 
             <Button
-              css={style.iconButton}
+              css={iconButton}
               onClick={() => {
                 setCurrentIndex(idx)
                 navigate("/edit")

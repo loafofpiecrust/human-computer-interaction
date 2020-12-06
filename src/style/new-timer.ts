@@ -5,7 +5,7 @@ import theme from "./theme"
 export const row = css({
   display: "flex",
   flexFlow: "row",
-  alignItems: "baseline",
+  alignItems: "center",
 })
 
 export const box = css({

@@ -1,13 +1,12 @@
-import React from "react"
+import React, { useState } from "react"
 import { css } from "@emotion/react"
-import * as style from "../style/new-timer"
-import theme from "../style/theme"
-import { Timer, useTimers, useTimerIndex, defaultTimer } from "../state"
-import Layout from "../layout"
 import { Button } from "reakit/Button"
-import { navigate } from "gatsby"
-import { FaArrowLeft } from "react-icons/fa"
-
+import {
+  useDialogState,
+  Dialog,
+  DialogDisclosure,
+  DialogProps,
+} from "reakit/Dialog"
 import {
   unstable_useFormState as useFormState,
   unstable_Form as Form,
@@ -15,7 +14,14 @@ import {
   unstable_FormInput as FormInput,
   unstable_FormSubmitButton as FormSubmitButton,
 } from "reakit/Form"
+import { navigate } from "gatsby"
+import { FaArrowLeft } from "react-icons/fa"
+import { Timer, useTimers, useTimerIndex, defaultTimer } from "../state"
+import Layout from "../layout"
+import * as style from "../style/new-timer"
+import theme from "../style/theme"
 import { rhythm } from "../style/typography"
+import PlaylistDialog, { Playlist } from "../playlist"
 
 const breakdown = (seconds: number) => ({
   seconds: Math.floor(seconds % 60),
@@ -39,6 +45,8 @@ export default () => {
   const timer = isNew ? defaultTimer : timers[timerIndex]
   const work = breakdown(timer.workPeriod)
   const shortBreak = breakdown(timer.shortBreak)
+  const [playlist, setPlaylist] = useState(timer.playlist)
+  const playlistDialog = useDialogState()
   const form = useFormState({
     values: {
       ...timer,
@@ -66,6 +74,7 @@ export default () => {
           values.workSeconds
         ),
         intervals: Number.parseInt(values.intervals),
+        playlist,
       }
       if (isNew) {
         setTimers([...timers, timer])
@@ -87,7 +96,7 @@ export default () => {
 
   return (
     <Layout>
-      <header css={style.row}>
+      <header css={[style.row, { alignItems: "baseline" }]}>
         <Button css={style.iconButton} onClick={() => navigate("/timers")}>
           <FaArrowLeft size={24} />
         </Button>
@@ -208,6 +217,18 @@ export default () => {
               <option value="Our Recommendation">Our Recommendation</option>
             </select>
           </div>
+
+          <div css={formGroup}>
+            <span>{playlist ? playlist.title : null}</span>
+            <DialogDisclosure {...playlistDialog}>
+              Choose a Playlist
+            </DialogDisclosure>
+            <PlaylistDialog
+              {...playlistDialog}
+              onChoose={(playlist) => setPlaylist(playlist)}
+            />
+          </div>
+
           <div>
             <FormSubmitButton
               {...form}

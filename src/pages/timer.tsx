@@ -4,6 +4,7 @@ import { Group } from "reakit/Group"
 import { Button } from "reakit/Button"
 import Slider from "react-slider"
 import { useCurrentTimer, Timer, Period } from "../state"
+import { currentSong } from "../playlist"
 import Layout from "../layout"
 import theme, { marginY, timespan } from "../style/theme"
 import * as style from "../style/new-timer"
@@ -17,6 +18,7 @@ export default () => {
   const [intervalIndex, setInterval] = useState(0)
   const [totalTime, setTotalTime] = useState(0)
   const [paused, setPaused] = useState(false)
+  const song = currentSong(timer.playlist, totalTime)
 
   function progressInterval() {
     if (intervalIndex >= timer.intervalCount - 1) {
@@ -70,6 +72,7 @@ export default () => {
         currentInterval={intervalIndex}
         totalTime={totalTime}
       />
+
       <BreakQuiz
         timer={timer}
         periodType={periodType}
@@ -86,6 +89,13 @@ export default () => {
               onChange={() => setTotalTime(totalTime + 1)}
               isPaused={paused}
             />
+
+            {song.song ? (
+              <div css={{ marginBottom: rhythm(0.5) }}>
+                Playing "{song.song.title}" by {song.song.artist}
+              </div>
+            ) : null}
+
             <div css={style.row}>
               <Button
                 css={{ backgroundColor: theme.colors.pause, width: 260 }}
@@ -151,7 +161,7 @@ const Countdown = (props: {
           { fontSize: "2rem", fontFamily: theme.fonts.monospace },
         ]}
       >
-        {displaySeconds(seconds)} / {displaySeconds(props.totalSeconds)}
+        {displaySeconds(seconds)} Left
       </div>
     </>
   )
