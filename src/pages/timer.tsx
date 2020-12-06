@@ -146,7 +146,7 @@ const Countdown = (props: {
         let newSecs = seconds - 1
         props.onChange(newSecs)
         setSeconds(newSecs)
-      }, 1000)
+      }, 990)
       return () => clearInterval(interval)
     } else if (!props.isPaused) {
       props.onComplete()

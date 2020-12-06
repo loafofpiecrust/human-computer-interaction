@@ -62,6 +62,7 @@ const styles = css({
     },
   },
   label: {
+    fontWeight: "bold",
     "&.fn, &.ln": {
       marginLeft: "40%",
     },

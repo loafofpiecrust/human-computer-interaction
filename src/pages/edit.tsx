@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import { css } from "@emotion/react"
 import { Button } from "reakit/Button"
+import { Tooltip, TooltipReference, useTooltipState } from "reakit/Tooltip"
 import {
   useDialogState,
   Dialog,
@@ -106,7 +107,7 @@ export default () => {
         <Form {...form}>
           <div css={formGroup}>
             <FormLabel {...form} name="title" css={{ marginRight: 33 }}>
-              Title
+              Title:
             </FormLabel>
             <FormInput
               {...form}
@@ -117,9 +118,13 @@ export default () => {
           </div>
 
           <div css={formGroup}>
-            <FormLabel {...form} name="workPeriod">
-              Work Time
-            </FormLabel>
+            <LabelWithHint
+              form={form}
+              name="workPeriod"
+              hint={<span>How long to work before taking a break</span>}
+            >
+              Work Time:
+            </LabelWithHint>
             <FormInput
               {...form}
               name="workHours"
@@ -153,7 +158,6 @@ export default () => {
             <FormLabel {...form} name="workSeconds">
               s
             </FormLabel>
-            <p>How long to work before taking a break</p>
           </div>
 
           <div css={formGroup}>
@@ -168,7 +172,16 @@ export default () => {
           </div>
 
           <div css={formGroup}>
-            <FormLabel {...form}>Rest Time</FormLabel>
+            <LabelWithHint
+              form={form}
+              hint={
+                <span>
+                  Length of your short break following every work period
+                </span>
+              }
+            >
+              Rest Time:
+            </LabelWithHint>
             <FormInput
               {...form}
               name="shortBreakHours"
@@ -204,7 +217,6 @@ export default () => {
             <FormLabel {...form} name="shortBreakSeconds">
               s
             </FormLabel>
-            <p>Length of your short break following every work period</p>
           </div>
 
           <div css={formGroup}>
@@ -219,8 +231,19 @@ export default () => {
           </div>
 
           <div css={formGroup}>
+            <LabelWithHint
+              form={form}
+              hint={
+                <span>
+                  This playlist will automatically align with your work and
+                  break periods.
+                </span>
+              }
+            >
+              Playlist:{" "}
+            </LabelWithHint>
             <span>{playlist ? playlist.title : null}</span>
-            <DialogDisclosure {...playlistDialog}>
+            <DialogDisclosure {...playlistDialog} css={{ marginLeft: 16 }}>
               Choose a Playlist
             </DialogDisclosure>
             <PlaylistDialog
@@ -268,3 +291,35 @@ const narrow = css({
   marginLeft: "1rem",
   marginRight: 4,
 })
+
+const LabelWithHint = (props: {
+  hint: any
+  children: any
+  form: any
+  name?: string
+}) => {
+  const tooltip = useTooltipState()
+  return (
+    <>
+      <TooltipReference
+        as={FormLabel}
+        {...tooltip}
+        name={props.name}
+        {...props.form}
+        css={{ cursor: "help" }}
+      >
+        {props.children}
+      </TooltipReference>
+      <Tooltip
+        {...tooltip}
+        css={{
+          background: "white",
+          border: "1px solid black",
+          padding: rhythm(0.25),
+        }}
+      >
+        {props.hint}
+      </Tooltip>
+    </>
+  )
+}
