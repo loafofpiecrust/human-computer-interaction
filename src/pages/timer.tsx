@@ -18,7 +18,7 @@ export default () => {
   const [intervalIndex, setInterval] = useState(0)
   const [totalTime, setTotalTime] = useState(0)
   const [paused, setPaused] = useState(false)
-  const song = currentSong(timer.playlist, totalTime)
+  const song = currentSong(timer?.playlist, totalTime)
 
   function progressInterval() {
     if (intervalIndex >= timer.intervalCount - 1) {
@@ -35,8 +35,12 @@ export default () => {
     }
   }
 
+  if (!timer) {
+    return <Layout />
+  }
+
   return (
-    <Layout title={timer.title}>
+    <Layout title={timer?.title}>
       <header css={style.row}>
         <div
           css={{
@@ -47,7 +51,7 @@ export default () => {
             flexGrow: 1,
           }}
         >
-          <h1>{timer.title}</h1>
+          <h1>{timer?.title}</h1>
           <span>{periodType} Period</span>
         </div>
         <Group>

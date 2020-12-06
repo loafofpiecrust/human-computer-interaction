@@ -6,7 +6,7 @@ import { rhythm, options } from "./style/typography"
 import logo from "./assets/logo.png"
 import {} from "@emotion/react/types/css-prop.d"
 
-const Layout = (props: { children: any; title?: string }) => (
+const Layout = (props: { children?: any; title?: string }) => (
   <>
     <Global styles={styles} />
     <Helmet title={props.title ?? "Personalized Music Timer"} />
