@@ -40,7 +40,7 @@ const recompose = (
   Number.parseInt(seconds as string)
 
 export default () => {
-  const [timerIndex] = useTimerIndex(null)
+  const [timerIndex, setTimerIndex] = useTimerIndex(null)
   const isNew = timerIndex === null
   const [timers, setTimers] = useTimers<Timer[]>([])
   const timer = isNew ? defaultTimer : timers[timerIndex]
@@ -91,6 +91,7 @@ export default () => {
   function deleteTimer() {
     const newList = [...timers]
     newList.splice(timerIndex!, 1)
+    setTimerIndex(null)
     setTimers(newList)
     navigate("/timers")
   }
